@@ -12,6 +12,7 @@ An **unlock** is one practical challenge that gives the learner a capability, pr
 |---|---|
 | Prerequisites, mastery target, class (essential/optional), hour estimate, authoring status | `CATALOG.md` (single source) |
 | The 12 unlock fields | `UNLOCKS/<ID>.md` |
+| How the learner is taught it (sections, exercises, answers) | `LEARN/<ID>/` (format: `TEMPLATES/LEARN_UNLOCK.md`) |
 | Done / in progress | `LEARNER_STATE.md` |
 | Proof | `EVIDENCE/<ID>/` |
 | Available / blocked | **Derived**, never stored: run `python3 tools/check_course.py --status` |
@@ -54,6 +55,10 @@ Claude may decide, within those limits: the explanations, exercises, practical c
 If an unlock needs a change to any frozen boundary, Claude presents the change and its consequences and waits for the learner's approval, then logs it in `DECISION_LOG.md`. Examples: a new prerequisite, a different mastery target, 3 more hours, moving an unlock between essential and optional, a deliverable that no longer serves its criterion. Nothing here authorizes adding unlocks or widening scope.
 
 `python3 tools/check_course.py` records the catalog's boundary columns as a fingerprint when the curriculum is approved and fails if they later change without an approved update.
+
+## Learning material
+
+An unlock file defines *what* must be achieved. `LEARN/<ID>/` is *how* the learner gets there, at their own pace. The complete material is written before the learner is asked to begin the unlock, and `tools/check_course.py` refuses to accept an unlock as in progress or completed without `LEARN/<ID>/README.md`. It stays inside the same frozen boundaries as the unlock: explanations, exercises, verification procedures and implementation details may be chosen freely; the ID, prerequisites, class, mastery target, hours and phase contribution may not.
 
 ## Authoring state
 

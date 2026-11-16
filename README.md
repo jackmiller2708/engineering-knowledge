@@ -40,6 +40,7 @@ Capabilities are unlocked by doing, not by reading. Each unit (an *unlock*) is a
 | `project/design/` | Design documents the learner writes (created on first use) |
 | `knowledge/` | Canonical concept documents (created on demand) |
 | `UNLOCKS/<ID>.md` | Full definition of one challenge |
+| `LEARN/<ID>/` | The self-paced learning material for one unlock, prepared in full before the learner begins. Start at its `README.md` |
 | `LEARNER_PROFILE.md` | Stable preferences and career context |
 | `LEARNER_STATE.md` | What is verified as done (never anything else) |
 | `EVIDENCE/` | Records and evidence bundles backing each completion |

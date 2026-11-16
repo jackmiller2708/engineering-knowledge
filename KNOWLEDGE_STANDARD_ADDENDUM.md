@@ -45,7 +45,7 @@ The standard describes a larger ecosystem with separate repositories. This cours
 | Engineering TypeScript / Go / Rust | `knowledge/languages/{typescript,go,rust}/` | Language-specific behavior only, linking to the concept document |
 | Engineering Projects | `project/` | Plans, architecture decisions, design documents. Not source code |
 | Engineering Career | `career/` | Market research, direction analysis, later credentials and interview notes |
-| Course control (not in the standard) | repository root, `PHASES/`, `UNLOCKS/`, `EVIDENCE/`, `ARCHIVE/`, `TEMPLATES/`, `tools/` | Curriculum, learner state, evidence, instructions |
+| Course control (not in the standard) | repository root, `PHASES/`, `UNLOCKS/`, `LEARN/`, `EVIDENCE/`, `ARCHIVE/`, `TEMPLATES/`, `tools/` | Curriculum, learner state, evidence, instructions |
 
 Rules, from §10.1, applied across directories:
 1. A concept has one canonical home. Link to it; do not copy it.
@@ -56,3 +56,7 @@ Rules, from §10.1, applied across directories:
 6. Historical experiments (`EVIDENCE/`) stay distinguishable from current verified guidance (`knowledge/`).
 
 Concept documents are created on demand, not in advance (`knowledge/README.md`).
+
+**Learning material is not a concept document.** `LEARN/<ID>/` presents one unlock to the learner: its steps, exercises and answer keys. It teaches from the standard's concept structure (problem, model, mechanism, consequences, limits) but is not the canonical home of a concept. When a language-independent concept needs a canonical document, that goes in `knowledge/`, and the learning material links to it instead of repeating it.
+
+**Teaching examples are the one place code may live in this repository.** Runnable code that a lesson refers to sits under `LEARN/<ID>/examples/`. It is teaching material, not the learner's work and not PRJ-ENGINE; the learner's own code stays in their workspace. The checker rejects code anywhere else.

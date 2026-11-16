@@ -18,7 +18,7 @@ A learner may do both at once. They are separate decisions with separate records
 
 | Category | Files | Rule |
 |---|---|---|
-| **Canonical**: active across all operations, never silently changed or removed | `CURRICULUM.md`, `PHASES/`, `UNLOCKS/`, `COURSE_OBJECTIVE.md`, `project/PLAN.md`, `project/DECISIONS.md`, `DECISION_LOG.md`, `career/`, `knowledge/`, `TEMPLATES/`, `KNOWLEDGE_STANDARD*.md` | Never archived by a restart. Changed only through the governance rules in `CLAUDE.md` |
+| **Canonical**: active across all operations, never silently changed or removed | `CURRICULUM.md`, `PHASES/`, `UNLOCKS/`, `LEARN/`, `COURSE_OBJECTIVE.md`, `project/PLAN.md`, `project/DECISIONS.md`, `DECISION_LOG.md`, `career/`, `knowledge/`, `TEMPLATES/`, `KNOWLEDGE_STANDARD*.md` | Never archived by a restart. Changed only through the governance rules in `CLAUDE.md` |
 | **Learning-attempt records**: belong to one learning attempt | `LEARNER_STATE.md`, `SESSION_HANDOFF.md`, `EVIDENCE/**` | Archived (moved, never deleted) on a learning restart |
 | **Implementation-attempt records**: belong to one implementation attempt | `project/design/**`: drafts, per-unlock designs, session implementation notes, unfinished experimental artifacts, superseded designs | Archived on a learning restart *and* on a new implementation attempt |
 | **Workspace** | The learner's working code, wherever it lives | No procedure here modifies, moves or deletes it. Procedures only record descriptions |

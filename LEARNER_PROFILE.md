@@ -31,6 +31,23 @@ Owner: learner. Stable facts only. Progress belongs in `LEARNER_STATE.md`.
 - Weekends: up to 8 hours per day are possible. Weekdays: 2–4 hours optional.
 - Maximum availability is not a guaranteed commitment; extra time speeds progress or absorbs difficult challenges.
 
+## Environment and experience (stated by the learner, 2026-11-16)
+
+- **Primary environment:** Linux at home (any distribution; Zsh). **Secondary:** Windows at work (PowerShell 7). Keep the workflow portable across both where practical; Linux is primary for the initial Go work; avoid distribution-specific assumptions.
+- **Go:** no prior experience; learn it from scratch, introduced through the actual task.
+- **SQL:** passed a university course about six years ago; knowledge needs refreshing.
+- **Linux:** daily use at home. **Docker:** beginner (understands its purpose, little hands-on use).
+
+## Delivery preference (stated by the learner, 2026-11-16)
+
+A **self-paced course**, not a conversational, question-by-question tutoring session:
+- Learning material for each unlock is prepared in advance, in full, and presented in ordered, manageable sections.
+- At the start of a session or unit, say exactly which section to study and what to accomplish. Do not overwhelm with the whole unlock at once; do not make the learner wait for another conversation to reach the next prepared section.
+- No mandatory conversational gates: no predictions, quizzes or comprehension questions have to be answered in chat to continue.
+- Questions live inside the material. Explanations and answer keys are in clearly separated files, opened after attempting.
+- The learner can still ask questions and request explanations whenever they need help.
+- Keep preparation and execution apart: never claim the learner has installed anything, run a command or completed an exercise.
+
 ## Instruction preferences
 
 - Direct, plain language.
@@ -43,6 +60,5 @@ Owner: learner. Stable facts only. Progress belongs in `LEARNER_STATE.md`.
 
 ## Not yet known (ask when relevant, then record here with approval)
 
-- Operating system and machine(s).
-- Prior Go, SQL, Linux, Docker experience level.
+- CPU and memory of the two machines; whether Docker is installed on either.
 - Current employment constraints.

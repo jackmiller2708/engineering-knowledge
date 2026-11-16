@@ -158,3 +158,28 @@ Entry types: `design`, `approval`, `change`, `restart`, `governance`.
 **Tooling.** `tools/test_check_course.py` hard-coded the PROPOSED header, so approval broke 23 of its 50 tests. The tests now reset each temporary copy to a known state, and four tests cover the approved state as recorded (54 tests). `tools/check_course.py` was not changed. The checker does not validate the `approved_commit`, `approved_base` or `approved_branch` fields; a test checks that they are present and well formed.
 
 **Not done, by instruction.** No commit, push, merge, pull request, release or tag; no other repository; no source code moved into this repository; `KNOWLEDGE_STANDARD.md` untouched.
+
+## D-008 — Self-paced delivery becomes the default; learning material added; teaching examples may be code (governance) — 2026-11-16 — status: applied at the learner's direction (curriculum approved in D-007)
+
+**Learner's direction (inputs).** (1) Publish the current work: done as commits `d3fd988f7892458b4e02752fc41e47aca6fd22c6` (approval and governance), `3daacb15644c28f45837fbcc9b99cc3569400b55` (teaching workflow) and `8ecf14bafa81b20cc1f441542f9808f678dc9f8b` (P0-GO-01 progress records), pushed to `review/final-curriculum-candidate`. (2) Replace the conversational, question-by-question default with a self-paced course: material prepared in advance in full, presented in ordered sections, no mandatory chat answers, questions inside the material with answers kept apart, help on request, the approved teaching approach and completion requirements intact, preparation kept apart from the learner's execution, Linux with Zsh primary and Windows with PowerShell 7 secondary.
+
+**Applied.**
+- `CLAUDE.md` sections 1 to 5: the default is self-paced material in `LEARN/<ID>/`, prepared in full before the learner begins, presented progressively, with no conversational gates; the seven-step order is now the structure of the material rather than a chat routine; retention practice lives in recall blocks and cards; preparation and execution are kept apart. Teach mode may write `LEARN/<ID>/**`.
+- New: `LEARN/` convention and `TEMPLATES/LEARN_UNLOCK.md`; `LEARN/P0-GO-01/` (start page, 8 sections, hint ladder, answer keys, recall card, examples).
+- `tools/check_course.py`: code is allowed only under `LEARN/<ID>/examples/`; each `LEARN/<ID>/` folder is checked for shape; an unlock cannot be in progress or completed without its `LEARN/<ID>/README.md`; lesson code blocks must equal their example files. `tools/test_check_course.py`: 67 tests, including a check that the new tests fail when the rule is removed.
+- `.gitattributes`: example files use LF; fixture files are never converted.
+- `LEARNER_PROFILE.md`: the delivery preference, environment and experience the learner stated. `KNOWLEDGE_STANDARD_ADDENDUM.md`, `UNLOCKS/README.md`, `PROCEDURES.md`, `README.md`: updated to match.
+
+**Choices to confirm or veto.**
+1. **A labelled spoiler.** `LEARN/P0-GO-01/examples/spoiler-reference-xd/` is a complete solution to the unit's challenge. Earlier wording said the challenge is "never handed over". It is now never in the reading flow; a hint ladder comes first, the spoiler is kept apart, the learner records whether they opened it, and the evaluation asks for an unseen variation if they did. Reason: the learner asked for answer keys and a path that does not depend on chat, and the solution is also what the acceptance checker was validated against.
+2. **The `xd` layout is fixed by the course.** The unlock leaves it open; the material specifies it exactly so that an independent acceptance checker (`examples/accept`) can verify any conforming implementation. This is an exercise detail inside the unlock's boundaries.
+3. **Teaching examples are code in this repository.** It is the one exception to "no source code here". It is confined to `LEARN/<ID>/examples/`, is not the learner's work or PRJ-ENGINE, and is enforced by the checker.
+4. **Learning material is not a concept document** (see the addendum). Language-independent concepts that deserve a canonical home still go in `knowledge/`.
+
+**Unchanged.** `UNLOCKS/P0-GO-01.md`, the catalog and its fingerprint, estimated hours (the eight sections sum to the unlock's 6 h), the approved commit, `KNOWLEDGE_STANDARD.md`, the checkpoints, and the risks R1 to R5.
+
+**What is verified and what is not.** Verified by the author in a Linux container (Go 1.24.7, Zsh 5.9): the examples compile and pass their tests; the acceptance checker passes the reference (15 of 15) and rejects 12 deliberately broken variants; every number and message quoted in the answer keys was observed; section 7's Zsh commands were dry-run end to end and produced a bundle the repository checker accepted. **Not run:** anything on Windows or in PowerShell; anything by the learner. No evidence exists for `P0-GO-01`, and nothing has been independently reproduced.
+
+**Correction to an earlier statement.** At the end of the previous session I reported that the checker and all 54 tests passed. The command I used printed only the `Ran 54 tests` line, and 3 tests were in fact failing: each test copy reset the approval header but not the learner state, so the new in-progress record made them fail. This was found while preparing the publish and fixed in `8ecf14b`; the suite is now run and read in full.
+
+**Approval:** the learner's direction above. Items 1 to 3 may be reversed by the learner.
