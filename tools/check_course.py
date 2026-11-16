@@ -11,7 +11,8 @@ Every mode runs ALL validation. Reports go to stdout. Errors and warnings go to 
 prefixed "ERROR:" / "WARNING:". Exit code 1 if any error was found, otherwise 0.
 
 What this checks: structure, graph, files, declared dependencies, hashes, field presence,
-internal references. What it does NOT do: it never runs an evidence bundle's commands, so a
+internal references, the shape of each LEARN/<ID>/ learning-material folder, and that lesson code
+blocks match their example files. What it does NOT do: it never runs an evidence bundle's commands, so a
 passing check does not show that any artifact reproduces. Paths are relative to the repo root.
 """
 import hashlib
@@ -32,7 +33,7 @@ REQUIRED_FILES = [
     "ENVIRONMENT.md", "KNOWLEDGE_STANDARD.md", "KNOWLEDGE_STANDARD_ADDENDUM.md",
     "UNLOCKS/README.md", "UNLOCKS/CATALOG.md",
     "TEMPLATES/LEARNER_STATE.initial.md", "TEMPLATES/UNLOCK.md", "TEMPLATES/EVALUATION.md",
-    "TEMPLATES/MANIFEST.md", "TEMPLATES/EXPERIMENT.md",
+    "TEMPLATES/MANIFEST.md", "TEMPLATES/EXPERIMENT.md", "TEMPLATES/LEARN_UNLOCK.md", "LEARN/README.md",
     "career/CAREER_RESEARCH.md", "career/POSTINGS.md",
     "project/README.md", "project/PLAN.md", "project/DECISIONS.md", "knowledge/README.md",
 ] + [f"PHASES/PHASE-{i}.md" for i in range(7)]
@@ -49,6 +50,7 @@ CANONICAL = {
 RETIRED_NAMES = {"PROJECTS.md"}
 CODE_EXT = {".go", ".rs", ".ts", ".tsx", ".js", ".jsx", ".java", ".c", ".cpp", ".sql", ".py"}
 CODE_FILES = {"go.mod", "go.sum", "package.json", "Cargo.toml", "pom.xml"}
+EXAMPLE_CODE_OK = re.compile(r"^LEARN/[^/]+/examples/")  # teaching examples are the one place code may live
 FORBIDDEN_IN_BUNDLE = {"node_modules", ".git", "vendor", "target", "__pycache__", ".venv"}
 MISSING_OK_PREFIXES = ("project/design/", "EVIDENCE/", "ARCHIVE/", "knowledge/")
 TOP_DIRS = ("PHASES", "UNLOCKS", "TEMPLATES", "EVIDENCE", "ARCHIVE", "tools", "knowledge",
@@ -146,8 +148,10 @@ def check_structure():
         if p.name in CANONICAL and not in_held and rel != CANONICAL[p.name]:
             err(f"{rel}: canonical location is {CANONICAL[p.name]}")
         is_code = p.suffix in CODE_EXT or p.name in CODE_FILES
-        if is_code and not in_held and not (rel.startswith("tools/") and p.suffix == ".py"):
-            err(f"{rel}: source code does not belong here (plans, design and evidence only)")
+        if is_code and not in_held and not (rel.startswith("tools/") and p.suffix == ".py") \
+                and not EXAMPLE_CODE_OK.match(rel):
+            err(f"{rel}: source code does not belong here (plans, design and evidence only; "
+                "teaching examples go under LEARN/<ID>/examples/)")
         if rel.startswith("EVIDENCE/") and p.name not in (".gitkeep",):
             parts = p.relative_to(ROOT / "EVIDENCE").parts
             if len(parts) < 3 and p.name != "README.md":
@@ -530,6 +534,65 @@ def check_curriculum(cat):
     return status
 
 
+# ---------------------------------------------------------------- learning material
+
+CODE_BLOCK = re.compile(r"\n`([\w./-]+)`\n```go\n(.*?)\n```", re.S)
+
+
+def check_learn(cat, done, prog):
+    base = ROOT / "LEARN"
+    if not base.is_dir():
+        return
+    dirs = sorted(p for p in base.iterdir() if p.is_dir())
+    for d in dirs:
+        rel = f"LEARN/{d.name}"
+        if d.name not in cat:
+            err(f"{rel}: not an unlock in the catalog")
+            continue
+        if cat[d.name]["def"] != "authored":
+            err(f"{rel}: learning material exists but the unlock is not authored")
+        readme = d / "README.md"
+        text = readme.read_text(encoding="utf-8") if readme.is_file() else ""
+        if not text:
+            err(f"{rel}: missing README.md (the start page)")
+        else:
+            for need in ("Start here", "What is prepared, and what is not", "Completion requirements"):
+                if need not in text:
+                    err(f"{rel}/README.md: missing the part '{need}'")
+        sections = sorted(p for p in d.glob("*.md") if re.match(r"\d\d-.+\.md$", p.name))
+        if not sections:
+            err(f"{rel}: no numbered section files (01-....md)")
+        nums = [int(p.name[:2]) for p in sections]
+        if nums and nums != list(range(1, len(nums) + 1)):
+            err(f"{rel}: section numbers must run 01, 02, ... without gaps (found {nums})")
+        for s in sections:
+            if s.name not in text:
+                err(f"{rel}/README.md: does not list section {s.name}")
+            st = s.read_text(encoding="utf-8")
+            if "## Done when" not in st:
+                err(f"{rel}/{s.name}: missing '## Done when'")
+        ans = d / "answers"
+        if ans.is_dir():
+            for a in ans.glob("[0-9][0-9]-answers.md"):
+                if not any(s.name.startswith(a.name[:2] + "-") for s in sections):
+                    err(f"{rel}/answers/{a.name}: no section {a.name[:2]} for these answers")
+        # lesson code blocks must equal the example file they show
+        exdir = d / "examples"
+        for s in sections:
+            st = s.read_text(encoding="utf-8")
+            for m in CODE_BLOCK.finditer(st):
+                path, code = m.group(1), m.group(2)
+                homes = [e for e in exdir.glob("*") if (e / path).is_file()] if exdir.is_dir() else []
+                if len(homes) == 1:
+                    want = (homes[0] / path).read_text(encoding="utf-8").rstrip("\n")
+                    if want != code:
+                        err(f"{rel}/{s.name}: code block for `{path}` differs from examples/{homes[0].name}/{path}")
+    for uid in sorted(set(done) | set(prog)):
+        if not (base / uid / "README.md").is_file():
+            err(f"{uid} is in progress or completed but LEARN/{uid}/README.md does not exist "
+                "(its learning material must be prepared before the learner begins)")
+
+
 # ---------------------------------------------------------------- references, pins
 
 def check_refs(cat):
@@ -543,7 +606,7 @@ def check_refs(cat):
             is_path = tok.endswith((".md", ".py")) or (("/" in tok) and tok.split("/")[0] in TOP_DIRS)
             if not is_path or tok.startswith("http") or tok.endswith("/"):
                 continue
-            if tok.startswith(MISSING_OK_PREFIXES) or tok in ("check_course.py", "manifest.md", "evaluation.md", "RESTART_NOTE.md") or re.search(r"-N\.", tok):
+            if tok.startswith(MISSING_OK_PREFIXES) or tok in ("check_course.py", "manifest.md", "evaluation.md", "RESTART_NOTE.md", "explanations.md") or re.search(r"-N\.", tok):
                 continue
             if not ((ROOT / tok).exists() or (p.parent / tok).exists()):
                 err(f"{rel}: reference `{tok}` does not exist")
@@ -629,6 +692,7 @@ def main(argv):
     status = check_curriculum(cat)
     if (done or prog) and status != "APPROVED":
         err("LEARNER_STATE.md records progress but CURRICULUM.md is not APPROVED")
+    check_learn(cat, done, prog)
     check_refs(cat)
     check_standard_pin()
 

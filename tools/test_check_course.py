@@ -411,6 +411,81 @@ class Evidence(Base):
         self.fails("not an unlock in the catalog")
 
 
+class LearningMaterial(Base):
+    """LEARN/<ID>/ folders: shape, code location, drift between lessons and examples."""
+    ID = "P0-GO-01"
+
+    def p(self, rel):
+        return self.root / "LEARN" / self.ID / rel
+
+    def test_code_outside_examples_is_rejected(self):
+        self.p("stray.go").write_text("package main\n")
+        self.fails("source code does not belong here")
+
+    def test_code_inside_examples_is_allowed(self):
+        (self.p("examples") / "extra.go").write_text("package main\n")
+        self.passes()
+
+    def test_missing_start_page(self):
+        self.p("README.md").unlink()
+        self.fails("missing README.md (the start page)")
+
+    def test_start_page_missing_a_required_part(self):
+        edit(self.root, f"LEARN/{self.ID}/README.md", "What is prepared, and what is not", "Status")
+        self.fails("missing the part 'What is prepared, and what is not'")
+
+    def test_section_not_listed_on_the_start_page(self):
+        self.p("09-extra.md").write_text("# Section 9\n\n## Done when\n- [ ] x\n")
+        self.fails("does not list section 09-extra.md")
+
+    def test_gap_in_section_numbers(self):
+        self.p("08-explain-and-defend.md").rename(self.p("09-explain-and-defend.md"))
+        self.fails("section numbers must run 01, 02, ... without gaps")
+
+    def test_section_without_done_when(self):
+        edit(self.root, f"LEARN/{self.ID}/02-modules-packages-programs.md", "## Done when", "## Finished")
+        self.fails("missing '## Done when'")
+
+    def test_answers_for_a_section_that_does_not_exist(self):
+        (self.p("answers") / "09-answers.md").write_text("# x\n")
+        self.fails("no section 09 for these answers")
+
+    def test_lesson_code_that_drifts_from_its_example_file(self):
+        edit(self.root, f"LEARN/{self.ID}/examples/cnt/count/count.go", "nothing left to read", "no more input")
+        self.fails("differs from examples/cnt/count/count.go")
+
+    def test_material_for_an_unknown_unlock(self):
+        (self.root / "LEARN" / "P9-NOPE-01").mkdir()
+        self.fails("not an unlock in the catalog")
+
+    def test_material_for_an_unauthored_unlock(self):
+        d = self.root / "LEARN" / "P0-CAR-01"
+        d.mkdir()
+        (d / "README.md").write_text("x")
+        self.fails("learning material exists but the unlock is not authored")
+
+
+class InProgressNeedsMaterial(unittest.TestCase):
+    """An unlock may not be in progress until its learning material has been prepared."""
+
+    def setUp(self):
+        self.root = make_copy(as_recorded=True)
+        self.addCleanup(shutil.rmtree, self.root.parent, ignore_errors=True)
+        if not re.search(r"^status: APPROVED$", (self.root / "CURRICULUM.md").read_text(), re.M):
+            self.skipTest("repository is not in the APPROVED state")
+
+    def test_in_progress_without_material_is_rejected(self):
+        edit(self.root, "LEARNER_STATE.md", "|---|---|---|\n| P0-GO-01",
+             "|---|---|---|\n| P0-GO-02 | 2026-12-01 | started |\n| P0-GO-01")
+        code, _, err = run(self.root)
+        self.assertEqual(code, 1)
+        self.assertIn("P0-GO-02 is in progress or completed but LEARN/P0-GO-02/README.md does not exist", err)
+
+    def test_recorded_progress_has_its_material(self):
+        code, _, err = run(self.root)
+        self.assertEqual(code, 0, err)
+
+
 class References(Base):
     def test_broken_path_reference(self):
         edit(self.root, "README.md", "# Engineering Course Control Plane", "# Engineering Course Control Plane\n\nSee `project/PLANX.md`.\n")

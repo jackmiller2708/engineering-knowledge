@@ -1,0 +1,4 @@
+# Course examples use LF line endings on every platform.
+LEARN/P0-GO-01/examples/** text eol=lf
+# Fixture files are exact bytes. Git must never convert their line endings.
+LEARN/P0-GO-01/examples/accept/fixtures/* -text -eol
