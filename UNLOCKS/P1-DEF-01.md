@@ -16,6 +16,7 @@ The engine runs, pauses, retries and resumes workflows from saved state. That on
 
 ## Prerequisites
 `P0-TYPE-01`.
+Uses: the data-modeling approach (P0-TYPE-01).
 
 ## Techniques
 Graph representation (steps and dependency edges), cycle detection, reachability, unique step identity, input/output contracts (declared fields and types), wiring one step's output into another's input, versioning a definition, JSON as the stored form.

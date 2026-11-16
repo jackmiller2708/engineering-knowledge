@@ -16,6 +16,7 @@ Data packed into integers (flags, headers, hashes) is made of fields several bit
 
 ## Prerequisites
 `P0-BIT-01`.
+Uses: the `bits` package (P0-BIT-01).
 
 ## Techniques
 Mask construction `(1<<width)-1`, shift-then-mask extract, clear-then-or insert, overflow checking.

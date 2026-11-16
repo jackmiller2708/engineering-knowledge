@@ -16,6 +16,7 @@ Two programs exchanging bytes must agree on order and length. Variable-length in
 
 ## Prerequisites
 `P0-BIT-02`.
+Uses: masks and shifts from the `bits` package (P0-BIT-02).
 
 ## Techniques
 Big vs little endian, unsigned varint (7 bits per byte, high bit = "more bytes follow"), zigzag mapping for signed numbers, bounds checks.

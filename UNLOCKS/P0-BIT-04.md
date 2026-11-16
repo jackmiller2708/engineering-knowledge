@@ -18,6 +18,7 @@ Compact records (headers, state words) need a defined layout and safe overflow b
 
 ## Prerequisites
 `P0-BIT-02`.
+Uses: `Extract` and `Insert` from the `bits` package (P0-BIT-02).
 
 ## Techniques
 Layout tables (name, offset, width), packing/unpacking driven by the layout, overlap and overflow detection.
@@ -44,4 +45,4 @@ Tests; the learner explains why changing a field's width is a breaking change fo
 L3.
 
 ## Next unlocks
-Optional side branch. Nothing else depends on it.
+- P0-BIT-07 — optional: the packing helpers join the reusable library.

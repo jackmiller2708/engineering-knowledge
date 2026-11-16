@@ -16,6 +16,7 @@ Binary formats, permission flags and compact state all need single-bit control. 
 
 ## Prerequisites
 `P0-GO-01`.
+Uses: Go toolchain and the PRJ-LABS project (P0-GO-01).
 
 ## Techniques
 Binary and hexadecimal notation; `&`, `|`, `^`, `&^`, `<<`, `>>`; unsigned vs signed integers; `math/bits` (as a reference to check against, after writing your own).

@@ -12,7 +12,7 @@ Owner: learner approves; Claude proposes. Append-only. Architecture decisions fo
 
 ## PD-002 — Delivery guarantee: at-least-once with idempotent effects
 
-- **Status:** Proposed.
+- **Status:** Proposed. Wording superseded by PD-004 (the decision stands; PD-004 states it precisely).
 - **Decision:** A step may run more than once; effects must be safe to repeat. No exactly-once claim.
 - **Consequences:** Idempotency keys (`P2-IDEM-01`), retry policy (`P2-RET-01`), documented delivery semantics (`P2-CONS-01`).
 
@@ -21,3 +21,11 @@ Owner: learner approves; Claude proposes. Append-only. Architecture decisions fo
 - **Status:** Proposed.
 - **Decision:** State, history and work claiming use PostgreSQL only. No broker, cache or consensus system in the essential plan.
 - **Consequences:** Claiming relies on row locks (`P3-Q-01`). "Distributed" means several processes sharing one database; this limit is stated in `PLAN.md`. Optional `P3-MSG-01` compares a broker.
+
+## PD-004 — Delivery guarantees G1–G4 (states PD-002 precisely)
+
+- **Status:** Proposed (part of the unapproved curriculum). Added 2026-11-16 by the correction pass (D-005).
+- **Decision:** The platform guarantees: G1 a handler may execute more than once; G2 at most one successful result is committed per step; G3 a worker that lost ownership cannot commit; G4 a retried external effect does not duplicate where the external system honors the idempotency contract. It does not guarantee exactly-once execution, and it cannot prevent duplicates against a system without idempotency support. Full wording, the crash window and the two policies for such systems: `project/PLAN.md`, "Delivery guarantees".
+- **Why:** An earlier wording ("no step is executed and committed twice") read as exactly-once execution, which contradicts at-least-once. The commit and the execution are different events with different guarantees.
+- **Consequences:** Request idempotency (`P2-IDEM-01`) and effect idempotency (`P2-CONS-01`) are separate unlocks with separate keys. Chaos tests (`P3-TST-01`) check commits and effects, not only commits. Completion criteria C2 and C3 were rewritten to match.
+- **Evidence still needed:** whether the idempotency contract is realistic for the external systems the learner cares about is an assumption; the fake external system in `P2-CONS-01` only models it.

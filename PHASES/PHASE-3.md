@@ -15,10 +15,10 @@ Concurrency, synchronization, queues, coordination, delivery semantics. "Distrib
 Phase 2 (`P2-REC-01`, `P2-FAIL-01`), plus `P0-GO-03`.
 
 ## Expected deliverables
-Multi-worker engine, lease and fencing implementation, chaos test suite, delivery-semantics document.
+Multi-worker engine, lease and fencing implementation, chaos test suite covering commits and effects, delivery-guarantee document.
 
 ## Exit criteria
-`P3-INT-01` complete: with at least 3 workers, repeatable chaos run shows no step committed twice and stale-worker commits rejected; ownership rules documented. Optional: clock/partial-failure experiments (`P3-DIST-01`), delivery write-up (`P3-DLV-01`), broker comparison (`P3-MSG-01`).
+`P3-INT-01` complete: with at least 3 workers, repeatable tests T1, T2, T3 and T6 (`project/PLAN.md`) show that handlers may run more than once, at most one successful result is committed per step, a stale worker's commit is rejected with the stored result unchanged, and effects stay idempotent under the same chaos run; ownership rules documented. The phase does not claim that handlers run once. Optional: clock/partial-failure experiments (`P3-DIST-01`), delivery write-up (`P3-DLV-01`), broker comparison (`P3-MSG-01`).
 
 ## Contribution to the objective
 Delivers C3. Main schedule risk: time box strictly. The optional unlocks are the first thing not to start if behind.

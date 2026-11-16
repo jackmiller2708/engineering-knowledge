@@ -18,7 +18,7 @@ Phase 1 deliverable, Phase 3 multi-worker engine for tracing and drills.
 Container images built in CI, local cluster deployment, dashboards or queries for key signals, threat model, runbooks tested in a drill.
 
 ## Exit criteria
-`P4-INT-01` complete: C4 and C5 satisfied with evidence.
+`P4-INT-01` complete: C4 and C5 satisfied with evidence. C5 means a drill, not only a document: on the deployed platform a failure is injected (for example kill a worker, restart the database, let a lease expire), detected through logs, metrics or the trace, and recovered by following the runbook only; afterwards the C2 and C3 checks are re-run. The drill record states the failure, the signal that revealed it, the steps followed, the time to recover and the check results. This needs the local Kubernetes deployment (`P4-K8S-01`) and cross-process tracing (`P4-OBS-03`), which is why neither is in the cut order.
 
 ## Contribution to the objective
 Converts a program into a service, which is what platform roles hire for.

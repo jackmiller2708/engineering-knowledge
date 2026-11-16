@@ -1,14 +1,16 @@
-# Evaluation — <UNLOCK-ID> — <YYYY-MM-DD> — attempt <n>
+# Evaluation — <UNLOCK-ID> — <YYYY-MM-DD>-<n>
+
+Lives at `EVIDENCE/<UNLOCK-ID>/<YYYY-MM-DD>-<n>/evaluation.md`, next to `manifest.md` and `artifacts/`. This file records the decision. The manifest records what was evaluated and how to reproduce it; do not repeat it here.
 
 - **Result:** passed | not yet
 - **Mastery shown:** L? (target L?)
-- **Evaluator:** Claude session (no identity needed)
-- **Evidence bundle:** `EVIDENCE/<UNLOCK-ID>/artifacts/` (project area <PRJ-ID>); commands to re-run: …
-- **Actual hours spent** (learner-reported): build __ / study __ / verify __ / consolidate __
-- **Environment:** OS, tool versions used (observed, from commands)
+- **Evaluator:** Claude session
+- **Evidence kind:** preserved | independently-reproduced (must equal the manifest)
+- **Manifest:** `manifest.md` in this directory
+- **Actual hours** (learner-reported): build __ / study __ / verify __ / consolidate __
 
 ## Acceptance criteria
-| # | Criterion | Met? | How observed (command, output summary) |
+| # | Criterion | Met? | Observed through (manifest command # or inspection) |
 |---|---|---|---|
 
 ## Mastery questions asked
@@ -16,7 +18,7 @@
 |---|---|---|
 
 ## Gaps found
-(what is missing; label as fact / observation / hypothesis)
+What is missing. Label statements as fact / observation / hypothesis.
 
 ## Decision
-Complete / stays in progress, and why.
+Complete, or stays in progress, and why. If not complete, what evidence is still needed.

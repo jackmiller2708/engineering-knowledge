@@ -2,7 +2,7 @@
 id: P2-IDEM-01
 title: Idempotent API requests
 phase: 2
-requires: [P1-API-03, P1-PG-03]
+requires: [P1-API-03, P1-PG-03, P1-SDK-01]
 mastery: L5
 ---
 
@@ -15,13 +15,14 @@ Make "create workflow" safe to retry: the same request sent twice has the effect
 Networks time out after the server has already acted. Clients retry. Without idempotency, retries start duplicate workflows, and the SDK cannot retry safely.
 
 ## Prerequisites
-`P1-API-03` (working API), `P1-PG-03` (transactions, unique constraints).
+`P1-API-03` (working API), `P1-PG-03` (transactions, unique constraints), `P1-SDK-01` (the TypeScript SDK that will send the keys).
+Uses: the workflow-creation API (P1-API-03); unique constraints and transactions (P1-PG-03); the TypeScript SDK (P1-SDK-01).
 
 ## Techniques
 Client-supplied idempotency key, request fingerprint (hash of the body), storing the first response, unique constraint as the arbiter, key scope and expiry, handling an in-flight duplicate.
 
 ## What you need first
-An operation is idempotent if repeating it leaves the system in the same state as doing it once. The server remembers `(scope, key)` with the request fingerprint and the response. Same key with a different body is a client error. A race between two identical requests must be settled by the database, not by application checks. There is an Internet draft for an `Idempotency-Key` header; check its current status before citing it as a standard.
+This unlock is about requests only. An operation is idempotent if repeating it leaves the system in the same state as doing it once. The server remembers `(scope, key)` with the request fingerprint and the response. Same key with a different body is a client error. A race between two identical requests must be settled by the database, not by application checks. There is an Internet draft for an `Idempotency-Key` header; check its current status before citing it as a standard.
 
 ## Practical challenge
 Add idempotency to workflow creation: key from a header, table `idempotency_keys`, same key and body returns the original response; same key different body returns a conflict; a second request while the first is still running behaves as documented (wait or reject).
@@ -43,4 +44,4 @@ Run tests; evaluator reviews the transaction boundary. Oral (L5): "Why not check
 L5.
 
 ## Next unlocks
-- P2-CONS-01 — the same idea applied to step execution and external effects.
+- P2-CONS-01 — this unlock stops a retried *request* from creating a second workflow. It does not stop a retried *step* from repeating an external effect. That is a different problem with a different key, and it is next.

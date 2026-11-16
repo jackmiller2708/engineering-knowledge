@@ -16,6 +16,7 @@ Network connections and files deliver bytes, not messages. A parser that trusts 
 
 ## Prerequisites
 `P0-BIT-05`.
+Uses: the `codec` package (P0-BIT-05).
 
 ## Techniques
 Frame layout (magic, version, type, length, payload, checksum), streaming reads with `io.Reader`, maximum frame size, CRC-32 checksums (`hash/crc32`), error types for each failure.

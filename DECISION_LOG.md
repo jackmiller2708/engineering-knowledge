@@ -82,3 +82,43 @@ Entry types: `design`, `approval`, `change`, `restart`, `governance`.
 **Supersedes:** D-001 and D-002 references to external project repositories and `PROJECTS.md`; D-003 "Unresolved" paragraph (repository boundary) and its interim rules (no concept documents, `CAREER_RESEARCH.md` provisional).
 
 **Not changed:** the standard (verified byte-identical to the supplied file) and its "Proposed" status line. The specific D-003 reconciliation edits still await the learner's confirmation.
+
+## D-005 — Correction pass (design/governance) — 2026-11-16 — status: PROPOSED (curriculum remains unapproved; no architecture change)
+
+**Input:** the learner asked for a focused correction of contradictions found in review, without redesign, without approving the curriculum, and without commits.
+
+**Decisions and rationale**
+1. **Phase 4 / C5.** Chose to keep the complete operational recovery path and remove `P4-OBS-03` and `P4-K8S-01` from the cut order. Rationale: C5 (a runbook used in a drill) needs a deployed target and cross-process visibility; a smaller path would keep C5's name and lose its meaning. Cut capacity falls from 47 h to 35 h (Phase 5, `P6-PERF-01`, `P0-INT-01`). Only C6 can be waived. C5 was rewritten to describe the drill (injected failure, detection signal, runbook-only recovery, post-recovery check, drill record). Verified by a checker rule over the cut order and the new "Completion proofs" table.
+2. **Delivery guarantees.** Wording that implied exactly-once execution ("executed and committed twice", "processed exactly once") was corrected. Guarantees G1–G4 and tests T1–T6 added to `project/PLAN.md`; PD-004 added to `project/DECISIONS.md` (states PD-002 precisely). `P2-CONS-01` retitled "Idempotent step effects and delivery guarantees", widened (6 h to 9 h) and authored in full: effect identity and key, the engine/external boundary, the crash window, retries, and what is possible without external idempotency (retry with duplicate risk, or no retry with `outcome_unknown`). `P2-IDEM-01` is now explicitly about requests only. C2 and C3 rewritten; C3 no longer implies handlers run once.
+3. **Just-in-time authoring.** After approval, Claude may author planned unlocks without per-unlock approval inside six frozen boundaries (identity and objective, prerequisites, class, mastery, hours, phase contribution); only the catalog's `Definition` cell changes. A boundary change needs approval and a log entry. Approving the curriculum and approving a change remain separate. A catalog fingerprint recorded at approval lets the checker detect silent boundary changes.
+4. **Evidence contract.** Evidence is a bundle `EVIDENCE/<ID>/<date>-<n>/` with `evaluation.md`, `manifest.md`, `artifacts/`. The manifest records capability, artifacts with sha256, commands, expected and observed results, exit statuses, environment, setup, limitations, and `preserved` versus `independently-reproduced`. Whole-workspace copies are forbidden.
+5. **Checker.** All modes now run all validation and keep failures; errors go to stderr, reports to stdout; new checks for structure, canonical locations, source code, evidence bundles, references, cut strategy, fingerprint and a pin on the standard. `tools/test_check_course.py` added (50 tests). A real gap found and fixed: malformed IDs in `Requires` were silently dropped.
+6. **Restart.** Three operations (resume, restart learning progression, start a new implementation attempt) and four record categories; reuse after archiving needs explicit revalidation; the workspace is never touched.
+7. **Prerequisites.** Manual review of authored challenges against prerequisites. Fixed: `P0-BIT-07` now requires `P0-BIT-04`; `P1-PG-03` requires `P0-GO-03` (goroutines); `P2-IDEM-01` requires `P1-SDK-01` (SDK sends the keys); `P3-TST-01` requires `P2-CONS-01` (effects under chaos); `P6-VER-01` requires `P2-INT-01` (Phase 2 invariants). Unlocks now declare artifacts consumed in `Uses:` lines; the checker verifies those declarations only.
+8. **Career snapshot.** `P0-CAR-01` narrowed to an initial snapshot (at least 6 direct posting records per direction) and re-estimated 5 h to 7 h. Evidence tiers separated (direct record, pointer, aggregated observation, interpretation, hypothesis). 42 search-result pointers registered with URLs; none read.
+
+**Budget effect:** essential 357 h to 362 h (+3 for `P2-CONS-01`, +2 for `P0-CAR-01`); optional pool unchanged at 124 h. Reserve about 64 h, of which about 26 h is held for Phase 6; about 38 h (10%) remains for overruns.
+
+**Unchanged:** the objective, the September 2027 target, the 10 h/week commitment, the execution model (PD-001), the knowledge standard (hash-verified), the single repository.
+
+**Supersedes:** the cut-order table and the 357 h figures in D-002 and revision 2 of the review report; the C2/C3 wording in `COURSE_OBJECTIVE.md` as of D-004; the restart procedure of D-004.
+
+**Approval:** pending. Nothing here approves the curriculum.
+
+## D-006 — F3 resolved; independent-review branch prepared (governance) — 2026-11-16 — status: PROPOSED (curriculum remains unapproved)
+
+**Input (learner's direction):** (1) publish the current proposal for independent review on a new branch, `review/final-curriculum-candidate`, built from the working tree, with the original working branch and the default branch left unchanged and nothing merged; (2) include `FINAL_REVIEW_PACKAGE.md` and `FINAL_REVIEW_PACKAGE.patch`, keeping the original base hash in the report; (3) resolve review finding F3 first, by an acceptance-criteria clarification only, inside the proposed boundaries.
+
+**F3, the problem.** The *no retry after an ambiguous failure* policy in `P2-CONS-01` can only work if the engine knows, after a restart, that an attempt was in flight. That needs a durable attempt-start record made before the external call. No written criterion required it, and the criterion for the policy did not name the crash points.
+
+**F3, the change.** Only acceptance criterion 4 of `UNLOCKS/P2-CONS-01.md` was rewritten, as sub-criteria (a) to (g): attempt-start record committed and visible to a separate connection when the ledger receives the call; crash after the attempt start but before the call; crash after the call succeeded but before the commit; a timeout with no crash; the observation that those two crash points leave identical engine records; a ban on claiming the engine knows whether the effect happened when the outside system has neither idempotency nor lookup; and the contrast with the *retry* policy. The criterion also states that this unlock assumes a single engine process, because deciding that an attempt is orphaned while other workers run is the ownership problem of `P3-LEASE-01`.
+
+**Boundaries unchanged.** Identity and title, prerequisites, class (essential), mastery (L5), hours (5+2+1+1 = 9), and phase contribution (C2). The catalog fingerprint is identical before and after (`d28afa7b…381e`). No prerequisite, hours or scope was added.
+
+**Honest limits.** (1) `UNLOCKS/README.md` says no unlock is edited before approval; this edit was made at the learner's explicit direction, as an exception for review. (2) Criterion 4 adds crash-point cases inside experiment 4 while the estimate stays at 9 h; this may be tight, and if it proves so the right response is a proposal to change hours, which needs approval. (3) The acceptance criteria remain unexecuted.
+
+**Provenance.** The proposal's base is the original HEAD `6e1b12ae18ce1af2458d2fcadaa9092472cd7903`. The candidate is the tip of `review/final-curriculum-candidate`. Original working branch `ccr-b573edbb-crcfsw` is not modified.
+
+**Not changed:** every other curriculum file apart from this entry and a minimal correction to `SESSION_HANDOFF.md`.
+
+**Approval:** pending. Nothing here approves the curriculum.

@@ -51,7 +51,8 @@ Capabilities are unlocked by doing, not by reading. Each unit (an *unlock*) is a
 | `KNOWLEDGE_STANDARD_ADDENDUM.md` | Course-specific extensions to the standard only |
 | `TEMPLATES/` | Reusable document shapes |
 | `ARCHIVE/` | Previous attempts, kept after a restart |
-| `tools/check_course.py` | Consistency checker (optional, needs Python 3.9+) |
+| `tools/check_course.py` | Consistency checker (optional, needs Python 3.9+). Checks structure, hashes and references; never runs evidence commands |
+| `tools/test_check_course.py` | Behavioural tests for the checker (`python3 tools/test_check_course.py`) |
 
 ## Checking the repository
 
@@ -60,6 +61,7 @@ python3 tools/check_course.py            # validate graph, files, state
 python3 tools/check_course.py --status   # what is done / available / blocked
 python3 tools/check_course.py --mermaid  # print the dependency graph
 python3 tools/check_course.py --budget   # hours by phase, essential vs optional
+python3 tools/check_course.py --fingerprint  # catalog boundary fingerprint (recorded at approval)
 ```
 
 Learner progress is only durable once committed. Commit `LEARNER_STATE.md`, `EVIDENCE/` and `SESSION_HANDOFF.md` at the end of each session.

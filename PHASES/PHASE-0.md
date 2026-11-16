@@ -1,6 +1,6 @@
 # Phase 0 — Foundation
 
-**Dates (proposed):** 2026-11-30 → 2027-02-07 (10 weeks, one Tet week removed). **Essential 84 h** of 90 h capacity. Optional pool 43 h.
+**Dates (proposed):** 2026-11-30 → 2027-02-07 (10 weeks, one Tet week removed). **Essential 86 h** of 90 h capacity. Optional pool 43 h.
 
 ## Purpose
 Give a senior frontend engineer the low-level footing (bytes, memory, files, sockets, cost of operations) and Go fluency needed to build the engine, and start career evidence-gathering.
@@ -20,7 +20,7 @@ PRJ-LABS: hex dump tool, bit and codec packages, framed-record parser, crash-saf
 ## Exit criteria
 - All gate unlocks complete with evidence.
 - `P0-INT-01` complete or explicitly deferred by a logged decision (it is cut order 3 in `CURRICULUM.md`).
-- A decision on career direction priority recorded (or consciously deferred), based on `P0-CAR-01`.
+- `P0-CAR-01` complete: at least 6 direct posting records per direction in `career/POSTINGS.md`, a tally with sample sizes, and interpretations kept separate from observations. A career-priority decision is recorded, or consciously deferred; the snapshot does not force it.
 - A written list of foundation unlocks still open, carried as parallel work.
 
 ## Contribution to the objective

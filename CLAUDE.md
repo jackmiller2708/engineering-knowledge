@@ -35,8 +35,12 @@ Do not change curriculum while teaching. If you notice a gap or a bad challenge,
 - `EVIDENCE/**` — add evidence records. Never delete or rewrite old ones.
 - `SESSION_HANDOFF.md` — rewrite at session end.
 
+**Just-in-time unlock authoring (only once `CURRICULUM.md` status is `APPROVED`):** approval of the curriculum authorizes Claude to write `UNLOCKS/<ID>.md` for a *planned* unlock and to change that unlock's `Definition` cell in `UNLOCKS/CATALOG.md` from `planned` to `authored`, and nothing else in the catalog. No per-unlock approval is needed, provided the unlock stays inside the frozen boundaries in `UNLOCKS/README.md` ("Just-in-time authoring"). Author one when it is the learner's likely next choice, not in bulk. Before approval, no unlock is authored or edited. Refining an unlock the learner has started or completed needs approval, and the dependent completed work is listed (standard §9.2).
+
+Approving the curriculum and approving a change to it are different acts. Anything that changes a frozen boundary is presented to the learner, waits for approval, and is logged (below).
+
 **Needs explicit learner approval in this conversation, then log it in `DECISION_LOG.md`:**
-`COURSE_OBJECTIVE.md`, `CURRICULUM.md`, `PHASES/**`, `UNLOCKS/**` (including `CATALOG.md`), `TEMPLATES/**`, `PROCEDURES.md`, `CLAUDE.md`, `KNOWLEDGE_STANDARD*.md`, `LEARNER_PROFILE.md`.
+`COURSE_OBJECTIVE.md`, `CURRICULUM.md`, `PHASES/**`, `UNLOCKS/**` (except just-in-time authoring above; this includes any change to the catalog's title, prerequisites, mastery, class or hours), `TEMPLATES/**`, `PROCEDURES.md`, `CLAUDE.md`, `KNOWLEDGE_STANDARD*.md`, `LEARNER_PROFILE.md`.
 
 **Needs the learner to request it:** `ENVIRONMENT.md`, `project/README.md` (record the learner's real values; do not guess), `project/design/**` (the learner's own documents; Claude edits only on request), `knowledge/**` (create a concept document only when the learner asks or an authored unlock lists one; corrections need approval), `career/CAREER_RESEARCH.md` (add evidence only when the learner asks or during `P0-CAR-01` / `P6-CAR-01`; keep observations, interpretations and unknowns separate; never state a market fact without a source), `ARCHIVE/**` (only via the restart procedure).
 
@@ -64,13 +68,13 @@ Never commit, push, tag or publish unless the learner asks. At session end, remi
 An unlock is complete only when:
 1. Every acceptance criterion in `UNLOCKS/<ID>.md` is met, observed by running the verification (tests, experiments) or inspecting the work, **and**
 2. The learner demonstrates the mastery level in the unlock's mastery target by answering probing questions without help (explain mechanism → L2; apply to a variation → L3; name failure modes and trade-offs → L4; defend a design against objections → L5), **and**
-3. An evidence record exists in `EVIDENCE/<ID>/` (use `TEMPLATES/EVALUATION.md`) containing an evidence bundle (`project/README.md`): commands to re-run the verification, the files needed to run them, and captured output. A fresh session without the learner's workspace must be able to see what was proven.
+3. An evidence bundle exists at `EVIDENCE/<ID>/<YYYY-MM-DD>-<n>/` with `evaluation.md`, `manifest.md` and `artifacts/` (templates: `TEMPLATES/EVALUATION.md`, `TEMPLATES/MANIFEST.md`). The manifest states: the capability demonstrated; the exact artifacts evaluated (path and sha256); the commands to reproduce the verification; expected results; actual observed results; exit statuses; toolchain versions and environment; dependencies and setup; known limitations and unverified conditions; and whether the evidence is `preserved` (captured from the learner's own run) or `independently-reproduced` (an evaluator re-ran the commands from the bundle in a clean environment, with who and when). Never write `independently-reproduced` unless the commands were actually re-run. Keep only the files needed to reproduce this verification, plus provenance that points to the workspace; never copy a whole workspace. A fresh session without the learner's workspace must be able to say exactly what was demonstrated.
 
 Reading, watching or finishing a tutorial is never evidence. If evidence is insufficient, say what is missing and keep the unlock `in progress`. Record the mastery level actually shown, even if lower than the target (then the unlock stays open).
 
 Ask the learner for actual hours (build / study / verify / consolidate) and record the total in `LEARNER_STATE.md`; they feed the time recalibration.
 
-After evaluating, update `LEARNER_STATE.md`, then run the checker.
+After evaluating, update `LEARNER_STATE.md` (the Evidence cell is the bundle directory), then run the checker. The checker validates structure, hashes and fields. It does not run the commands, so it never shows that anything reproduces.
 
 ## 6. Proposing curriculum changes
 
@@ -83,7 +87,7 @@ After evaluating, update `LEARNER_STATE.md`, then run the checker.
 
 ## 7. Resume, restart, handoff
 
-Follow `PROCEDURES.md` exactly. Restart archives history; it never deletes curriculum, decisions or evidence.
+Follow `PROCEDURES.md` exactly. It distinguishes three operations: resuming the current attempt, restarting learning progression, and starting a new implementation attempt. Restart archives learner records; it never deletes curriculum, canonical project records (`project/PLAN.md`, `project/DECISIONS.md`), decisions or evidence, and it never touches the implementation workspace.
 
 ## 8. Knowledge standard
 

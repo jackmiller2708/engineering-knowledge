@@ -4,6 +4,8 @@ Owner: learner approves changes.
 
 `KNOWLEDGE_STANDARD.md` (repository root, supplied by the learner, copied unchanged) is **canonical**. This file may only *extend* it for this course. If the two ever conflict, the standard wins and this file is corrected. Do not edit the standard from this repository.
 
+Pinned sha256: `223f2e5242ead15d24a0ed4d8c259a009557c448faafb7dd83938672d1a62f8a`. The checker compares the standard against this hash so that an unapproved edit is caught. If the learner approves a change to the standard, update this pin and log it in `DECISION_LOG.md`.
+
 The standard's own status line reads "Proposed". The learner has directed that it govern this curriculum, and that its status line and contents not be changed without the learner's explicit approval (`DECISION_LOG.md` D-003, D-004).
 
 ## How the standard applies here (no restatement)

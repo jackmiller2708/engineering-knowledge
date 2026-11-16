@@ -12,7 +12,7 @@ Owner: learner approves changes. This table is the single source for **prerequis
 
 | ID | Title | Requires | Mastery | Class | Hours | Definition |
 |---|---|---|---|---|---|---|
-| P0-CAR-01 | Map target roles from real job postings | — | L3 | E | 1+2+1+1 | planned |
+| P0-CAR-01 | Collect an initial market snapshot from real job postings | — | L3 | E | 1+4+1+1 | planned |
 | P0-GO-01 | Set up Go and ship a tested command-line tool | — | L3 | E | 3+1+1+1 | authored |
 | P0-GO-02 | Go types, interfaces and errors, for a TypeScript developer | P0-GO-01 | L3 | E | 4+1+1+1 | planned |
 | P0-GO-03 | Goroutines, channels and context basics | P0-GO-02 | L3 | E | 4+2+1+0 | planned |
@@ -22,7 +22,7 @@ Owner: learner approves changes. This table is the single source for **prerequis
 | P0-BIT-04 | Pack structured data into bits | P0-BIT-02 | L3 | O | 3+0+1+0 | authored |
 | P0-BIT-05 | Encode and decode binary formats (endianness, varints) | P0-BIT-02 | L4 | E | 4+1+1+1 | authored |
 | P0-BIT-06 | Parse a framed binary protocol safely | P0-BIT-05 | L4 | E | 5+1+2+1 | authored |
-| P0-BIT-07 | Package the codecs as a reusable library | P0-BIT-03, P0-BIT-06 | L3 | O | 2+0+1+1 | authored |
+| P0-BIT-07 | Package the codecs as a reusable library | P0-BIT-03, P0-BIT-04, P0-BIT-06 | L3 | O | 2+0+1+1 | authored |
 | P0-DS-01 | Measure cost: benchmarks and growth rates | P0-GO-01 | L3 | E | 3+1+1+0 | planned |
 | P0-DS-02 | Build a hash table from scratch | P0-DS-01, P0-BIT-02 | L4 | O | 5+1+1+0 | planned |
 | P0-DS-03 | Ordered search trees and why databases use B-trees | P0-DS-01 | L3 | O | 4+2+1+0 | planned |
@@ -41,7 +41,7 @@ Owner: learner approves changes. This table is the single source for **prerequis
 |---|---|---|---|---|---|---|
 | P1-PG-01 | Run PostgreSQL and query it from Go | P0-GO-02 | L3 | E | 2+1+1+0 | planned |
 | P1-PG-02 | Schema and migrations for workflows | P1-PG-01, P0-TYPE-01 | L4 | E | 3+2+1+0 | planned |
-| P1-PG-03 | Transactions and isolation: reproduce anomalies | P1-PG-01 | L4 | E | 4+2+1+1 | authored |
+| P1-PG-03 | Transactions and isolation: reproduce anomalies | P1-PG-01, P0-GO-03 | L4 | E | 4+2+1+1 | authored |
 | P1-PG-04 | Indexes and query plans on a large table | P1-PG-02 | L3 | O | 4+1+1+0 | planned |
 | P1-DEF-01 | Declarative workflow graph: steps, contracts, validation | P0-TYPE-01 | L5 | E | 3+2+1+1 | authored |
 | P1-SM-01 | Instance and step lifecycle as a pure state machine | P0-TYPE-01, P1-DEF-01 | L5 | E | 4+2+1+1 | authored |
@@ -60,12 +60,12 @@ Owner: learner approves changes. This table is the single source for **prerequis
 | ID | Title | Requires | Mastery | Class | Hours | Definition |
 |---|---|---|---|---|---|---|
 | P2-DUR-01 | Append-only execution history as source of truth | P1-SM-02 | L4 | E | 3+1+1+1 | planned |
-| P2-IDEM-01 | Idempotent API requests | P1-API-03, P1-PG-03 | L5 | E | 4+2+1+1 | authored |
+| P2-IDEM-01 | Idempotent API requests | P1-API-03, P1-PG-03, P1-SDK-01 | L5 | E | 4+2+1+1 | authored |
 | P2-RET-01 | Retry policy with backoff and jitter, persisted | P1-EXEC-01 | L4 | E | 3+1+1+1 | planned |
 | P2-TMO-01 | Timeouts and cancellation | P1-EXEC-01 | L4 | E | 3+2+1+0 | planned |
 | P2-REC-01 | Recover unfinished workflows after restart | P2-DUR-01, P2-RET-01 | L5 | E | 4+1+2+1 | planned |
 | P2-FAIL-01 | Failure-injection harness (kill mid-step, database errors) | P2-REC-01 | L4 | E | 4+0+2+1 | planned |
-| P2-CONS-01 | Delivery semantics: at-least-once with idempotent effects | P2-IDEM-01, P2-REC-01 | L5 | E | 3+2+1+0 | planned |
+| P2-CONS-01 | Idempotent step effects and delivery guarantees | P2-IDEM-01, P2-REC-01 | L5 | E | 5+2+1+1 | authored |
 | P2-INT-01 | Durability demo and written invariants | P2-FAIL-01, P2-CONS-01 | L5 | E | 1+1+2+1 | planned |
 
 ## Phase 3 — Distributed execution
@@ -80,7 +80,7 @@ Owner: learner approves changes. This table is the single source for **prerequis
 | P3-DIST-01 | Clocks, delays and partial failure: experiments | P3-LEASE-01 | L4 | O | 3+2+1+0 | planned |
 | P3-DLV-01 | Multi-worker delivery semantics: write-up and tests | P2-CONS-01, P3-FENCE-01 | L5 | O | 2+1+1+0 | planned |
 | P3-MSG-01 | Same workload on a message broker, compared with the Postgres queue | P3-Q-01 | L4 | O | 5+2+1+0 | planned |
-| P3-TST-01 | Chaos tests for multiple workers | P3-POOL-01, P2-FAIL-01 | L4 | E | 4+0+2+1 | planned |
+| P3-TST-01 | Chaos tests for multiple workers | P3-POOL-01, P2-FAIL-01, P2-CONS-01 | L4 | E | 4+0+2+1 | planned |
 | P3-INT-01 | Multi-worker demo with ownership guarantees | P3-TST-01, P3-FENCE-01 | L5 | E | 1+0+2+2 | planned |
 
 ## Phase 4 — Operability
@@ -115,7 +115,7 @@ Owner: learner approves changes. This table is the single source for **prerequis
 | ID | Title | Requires | Mastery | Class | Hours | Definition |
 |---|---|---|---|---|---|---|
 | P6-ARCH-01 | Architecture review and decision records | P4-INT-01 | L5 | E | 3+1+1+1 | planned |
-| P6-VER-01 | Correctness report: invariants and evidence | P3-INT-01 | L5 | E | 2+1+1+1 | planned |
+| P6-VER-01 | Correctness report: invariants and evidence | P3-INT-01, P2-INT-01 | L5 | E | 2+1+1+1 | planned |
 | P6-PERF-01 | Load test and bottleneck analysis | P4-INT-01 | L4 | E | 4+1+1+0 | planned |
 | P6-SEC-01 | Security review | P4-SEC-01, P4-INT-01 | L4 | O | 3+0+1+0 | planned |
 | P6-DOC-01 | Documentation and live demo | P6-ARCH-01 | L3 | E | 3+0+1+1 | planned |

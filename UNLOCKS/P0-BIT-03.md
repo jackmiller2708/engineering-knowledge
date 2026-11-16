@@ -18,6 +18,7 @@ The platform needs compact, comparable sets (for example what a caller may do). 
 
 ## Prerequisites
 `P0-BIT-02`.
+Uses: bit masks from the `bits` package (P0-BIT-02).
 
 ## Techniques
 Typed constants with `iota`, `Has/Grant/Revoke`, union/intersection/difference, `String()` for readable output, validation of unknown bits.

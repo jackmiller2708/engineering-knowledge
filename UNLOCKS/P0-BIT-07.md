@@ -2,7 +2,7 @@
 id: P0-BIT-07
 title: Package the codecs as a reusable library
 phase: 0
-requires: [P0-BIT-03, P0-BIT-06]
+requires: [P0-BIT-03, P0-BIT-04, P0-BIT-06]
 mastery: L3
 ---
 
@@ -17,7 +17,8 @@ Turn the bit, permission, pack, codec and frame packages into one coherent, docu
 Components that only work in the folder where they were written get rewritten later. This unlock practices API design: naming, errors, documentation, versioning.
 
 ## Prerequisites
-`P0-BIT-03`, `P0-BIT-06`.
+`P0-BIT-03`, `P0-BIT-04`, `P0-BIT-06`.
+Uses: `bits` (P0-BIT-02), `perm` (P0-BIT-03), `pack` (P0-BIT-04), `codec` (P0-BIT-05), `frame` (P0-BIT-06).
 
 ## Techniques
 Package boundaries, exported API review, Go doc comments and examples, semantic version tags, README usage.
