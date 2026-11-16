@@ -21,7 +21,7 @@ Mastery achieved is the level actually demonstrated (L0–L5). An unlock counts 
 
 | ID | Started | Notes |
 |---|---|---|
-| P0-GO-01 | 2026-11-16 | Part 1 given: setup on both machines, a worked example on a neighbouring problem, prediction questions. No results from the learner yet. |
+| P0-GO-01 | 2026-11-16 | Self-paced material prepared in full: `LEARN/P0-GO-01/` (8 sections). The learner starts at section 1. No results from the learner yet; nothing run or completed by the learner. |
 
 ## Checkpoints
 
