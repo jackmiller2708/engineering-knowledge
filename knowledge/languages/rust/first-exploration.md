@@ -8,7 +8,7 @@ You write a function that uses a piece of text, then you try to use the text aga
 
 ## Set up
 
-Work outside this repository, in any folder you like (this repository holds no Rust code). Same commands in Zsh and PowerShell 7:
+Work in any folder you like, outside this repository. Same commands in Zsh and PowerShell 7:
 
 ```
 cargo new ownership-play

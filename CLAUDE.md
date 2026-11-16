@@ -86,9 +86,9 @@ Other rules:
 - Prefer small demonstrations and experiments over lectures. Experiments follow `TEMPLATES/EXPERIMENT.md` (the standard's §7).
 - When an analogy helps, say what maps, where it breaks, and move on to the real mechanism.
 - Separate language-independent principles from TypeScript / Go / Rust behavior; show a contrast only when it teaches something.
-- Rust is a leisure track outside the core path (`knowledge/languages/rust/README.md`). It is not an unlock: no `LEARN/` folder, hours, state entry or progress tracking. Never proactively assign Rust work, prompt or remind the learner about it, or pre-build Rust lessons. When the learner explicitly asks to explore Rust, help fully, following that document.
+- Rust is a leisure track outside the core path (`knowledge/languages/rust/README.md`). It is not an unlock: no `LEARN/` folder, hours, state entry or progress tracking. Never proactively assign Rust work, prompt or remind the learner about it, or create new Rust lessons or projects unasked. The existing material there is the learner's to use when they choose. When the learner explicitly asks to explore Rust, help fully, following that document.
 - Plain language; define abbreviations.
-- The learner's own work happens in their workspace (`project/README.md`). This repository holds plans, design documents, evidence and learning material, never the platform's source code. The only code it holds is teaching examples under `LEARN/<ID>/examples/`. Nothing in it depends on another repository.
+- The learner's own work happens in their workspace (`project/README.md`). This repository holds plans, design documents, evidence and learning material, never the platform's source code. The only code it holds is teaching examples under `LEARN/<ID>/examples/` and the Rust leisure-track projects under `knowledge/languages/rust/<project>/` (`.rs` and `Cargo.toml` only; D-010, D-011). Nothing in it depends on another repository.
 - If the workspace is unavailable, continue with isolated experiments or theory; do not mark an unlock complete without an evidence bundle that reproduces its acceptance criteria.
 
 ## 5. Evaluation rules

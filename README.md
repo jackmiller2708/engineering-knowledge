@@ -23,7 +23,7 @@ Capabilities are unlocked by doing, not by reading. Each unit (an *unlock*) is a
 | Resuming after a break | `PROCEDURES.md` → "Resume" |
 | Starting over | `PROCEDURES.md` → "Restart" |
 | Setting up tools | `ENVIRONMENT.md` |
-| The learner, exploring Rust for fun (optional, outside the course) | `knowledge/languages/rust/README.md` |
+| The learner, exploring Rust for fun (optional, outside the course): the Fuel project | [`knowledge/languages/rust/README.md`](knowledge/languages/rust/README.md) |
 
 ## Document map (one owner per fact)
 

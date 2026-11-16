@@ -1,0 +1,16 @@
+# 10! = 3628800. The stack holds: n acc
+push 10
+push 1
+loop:
+  over        # n acc n
+  mul         # n acc*n
+  swap        # acc*n n
+  push 1
+  sub         # acc*n n-1
+  swap        # n-1 acc*n
+  over        # n-1 acc n-1
+  jz done     # when n-1 is 0 we are finished
+  jmp loop
+done:
+  print       # prints acc
+  halt

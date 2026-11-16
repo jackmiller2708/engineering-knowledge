@@ -1,0 +1,11 @@
+# Counts down from 20 million without printing: 100 million steps.
+# It needs more fuel than the default:  cargo run --release -- --fuel=1000000000 programs/heavy.fuel
+push 20000000
+loop:
+  push 1
+  sub
+  dup
+  jz done
+  jmp loop
+done:
+  halt

@@ -4,9 +4,9 @@ Owner: learner. This is the starting page for Rust. It is not an unlock, a phase
 
 ## Start here
 
-1. **Install** (once, skip if `cargo --version` already prints a version). Follow the official instructions: https://doc.rust-lang.org/book/ch01-01-installation.html. Linux/Zsh: `rustup` works. Windows/PowerShell 7: follow the same page. It says you also need a linker (usually from a C compiler). Nothing else is needed. Details: `ENVIRONMENT.md`.
-2. **Begin** with `first-exploration.md` in this folder: one small program that does not compile, and why. It takes 30 to 45 minutes and is optional. Or skip it and ask about whatever you are curious about.
-3. **Run experiments** in your own workspace, outside this repository: `cargo new <name>`, edit `src/main.rs`, `cargo run`. This repository holds no Rust source.
+1. **Install** (once; skip if `cargo --version` already prints a version). Follow the official instructions: https://doc.rust-lang.org/book/ch01-01-installation.html. The page says you also need a linker, usually from a C compiler. Nothing else is needed. Verified toolchain and platform: `rustc`/`cargo` 1.97.0 on Linux. Windows/PowerShell 7 and other versions: not verified. Details: [`ENVIRONMENT.md`](../../../ENVIRONMENT.md) and [`fuel/README.md`](fuel/README.md).
+2. **Begin** with the project in [`fuel/`](fuel/README.md): a deterministic stack machine you run, break and extend over several afternoons, in five explorations. Each exploration is a runnable Cargo project plus a guide, and each starts where the previous one ends, so any of them is a fine starting point. If you want something much smaller first, [`first-exploration.md`](first-exploration.md) is a 30 to 45 minute warm-up on ownership.
+3. **Run experiments** by `cd`-ing into an exploration folder and running `cargo run`; edit `src/main.rs` and run again. For your own scratch ideas, use a folder outside this repository (`cargo new <name>`).
 4. **Understand a concept more deeply:** the official Rust Book is the reference (https://doc.rust-lang.org/book/). For ideas that are not specific to Rust, ask for a concept document in `knowledge/<domain>/`.
 5. **Get help:** ask in a session, for example "explain borrowing with a small example". Claude helps fully when you ask and never brings Rust up on its own.
 
@@ -25,11 +25,11 @@ Stopping costs nothing and leaves no backlog. There is nothing to catch up on. T
 
 ## How help works
 
-- Start with a small program the learner runs. Explain only what that program needs.
+- Start with a small program the learner runs, such as one of the `fuel/` projects. Explain only what that program needs.
 - Language-independent concepts (memory, ownership as a general idea, concurrency, error handling, API design) have one canonical home in `knowledge/<domain>/`, written only when asked (`knowledge/README.md`). Rust help links there and explains only how Rust realizes the concept.
 - Compare with TypeScript or Go only when the comparison teaches something. Do not translate Go exercises line by line.
 - Be exact about guarantees (next section). Check any further claim against the official Rust documentation and say when it is unverified.
-- Experiments are code blocks in a page or in chat, run in the learner's own workspace. This repository holds no Rust source (`CLAUDE.md` section 4).
+- Rust source lives only in the projects under this folder (`CLAUDE.md` section 4, D-010). Scratch experiments belong outside the repository.
 
 ## Guarantees, stated precisely
 
@@ -55,13 +55,14 @@ Sources (official; the cited passages were read on 2026-11-16, not whole pages):
 
 Take any, in any order, or none. Nothing is "next".
 
-- A small program and Cargo.
-- Ownership, seen through `String`.
-- Moves, borrowing, shared and mutable references.
-- Lifetimes, once an example needs them.
-- Enums, pattern matching, structs, traits, generics, error handling.
-- Concurrency and systems programming, after the foundations.
-- Async, only if a concrete problem calls for it.
+- A small program and Cargo (`first-exploration.md`, `fuel/01-the-machine/`).
+- Ownership, seen through `String` (`first-exploration.md`).
+- Moves, borrowing, shared and mutable references (`fuel/03-borrowing-the-program/`).
+- Lifetimes, once an example needs them (`fuel/03-borrowing-the-program/`).
+- Enums, pattern matching, structs, traits, generics, error handling (`fuel/01-the-machine/`, `fuel/02-errors-and-fuel/`, `fuel/04-text-to-program/`).
+- Concurrency and systems programming, after the foundations (`fuel/05-parallel-runs/`).
+- Async, only if a concrete problem calls for it. Nothing in `fuel/` needs it.
+- Generics and traits beyond `Display`, closures, modules, `unsafe`: not covered yet. Ask, or extend the project.
 
 ## What success looks like
 

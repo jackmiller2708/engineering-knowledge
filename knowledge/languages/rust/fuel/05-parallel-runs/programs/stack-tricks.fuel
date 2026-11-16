@@ -1,0 +1,11 @@
+# swap, sub and pop in one place: prints -7, then 1.
+push 10
+push 3
+swap          # stack: 3 10
+sub           # 3 - 10
+print
+push 1
+push 2
+pop           # discard the 2
+print
+halt

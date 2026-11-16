@@ -223,6 +223,34 @@ class Structure(Base):
         (self.root / "project" / "main.go").write_text("package main\n")
         self.fails("source code does not belong here")
 
+    def test_rust_leisure_projects_may_hold_code(self):
+        d = self.root / "knowledge" / "languages" / "rust" / "fuel" / "01-demo" / "src"
+        d.mkdir(parents=True)
+        (d / "main.rs").write_text("fn main() {}\n")
+        (d.parent / "Cargo.toml").write_text("[package]\nname = \"demo\"\n")
+        self.passes()
+
+    def test_rust_exception_is_narrow(self):
+        base = self.root / "knowledge" / "languages" / "rust"
+        (base / "fuel").mkdir(parents=True, exist_ok=True)
+        for rel in ("fuel/helper.go", "fuel/tool.py", "fuel/app.ts"):   # wrong language inside a project
+            (base / rel).write_text("x\n")
+            self.fails("source code does not belong here")
+            (base / rel).unlink()
+        (base / "loose.rs").write_text("fn main() {}\n")                # not inside a project folder
+        self.fails("source code does not belong here")
+        (base / "loose.rs").unlink()
+        other = self.root / "knowledge" / "languages" / "go" / "demo"    # another language's folder
+        other.mkdir(parents=True)
+        (other / "main.rs").write_text("fn main() {}\n")
+        self.fails("source code does not belong here")
+
+    def test_code_elsewhere_in_knowledge_is_still_refused(self):
+        d = self.root / "knowledge" / "databases"
+        d.mkdir(parents=True)
+        (d / "main.rs").write_text("fn main() {}\n")
+        self.fails("source code does not belong here")
+
     def test_archive_without_restart_note(self):
         (self.root / "ARCHIVE" / "learning-attempt-1-2027-01-01").mkdir()
         self.fails("missing RESTART_NOTE.md")

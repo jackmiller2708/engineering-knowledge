@@ -1,0 +1,3 @@
+# Build output from running the Rust leisure-track projects (knowledge/languages/rust/).
+# Cargo.lock IS committed (D-011): these are programs, and the lockfile reproduces the build.
+knowledge/languages/rust/**/target/

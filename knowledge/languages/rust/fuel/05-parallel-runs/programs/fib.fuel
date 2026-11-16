@@ -1,0 +1,10 @@
+# Fibonacci numbers until the next one no longer fits in an i64.
+push 0          # a
+push 1          # a b
+loop:
+  over          # a b a
+  print         # a b
+  swap          # b a
+  over          # b a b
+  add           # b (a+b)
+  jmp loop

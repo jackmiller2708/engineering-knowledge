@@ -2,3 +2,7 @@
 LEARN/P0-GO-01/examples/** text eol=lf
 # Fixture files are exact bytes. Git must never convert their line endings.
 LEARN/P0-GO-01/examples/accept/fixtures/* -text -eol
+# Rust leisure-track projects: LF on every platform.
+knowledge/languages/rust/**/*.rs text eol=lf
+knowledge/languages/rust/**/*.fuel text eol=lf
+knowledge/languages/rust/**/Cargo.toml text eol=lf

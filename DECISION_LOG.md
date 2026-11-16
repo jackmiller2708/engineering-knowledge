@@ -203,3 +203,43 @@ Entry types: `design`, `approval`, `change`, `restart`, `governance`.
 **Not validated.** No Rust toolchain was installed or run. The track document contains no commands that need verifying.
 
 **Approval:** the learner's direction in this conversation.
+
+---
+
+## D-010 — Rust leisure track gets a runnable project; Rust source may live under `knowledge/languages/rust/` (governance) — 2026-11-16 — status: applied at the learner's direction
+
+**Learner's direction.** The Rust track was too small to explore. The learner asked for a substantial, hands-on, optional experience: a project worth building, several self-contained explorations with runnable code and experiments, concepts introduced when the project needs them. Rust stays outside the core curriculum: no required hours, deadlines, sequence, progress reporting or mastery gates.
+
+**Applied.**
+- New project `knowledge/languages/rust/fuel/`: a deterministic stack machine ("Fuel"), five explorations (`01-the-machine` to `05-parallel-runs`), each a Cargo project with a guide. Each starts where the previous one ends. A project overview in `fuel/README.md`. No dependencies.
+- **Source code rule widened, narrowly.** `CLAUDE.md` section 4 and `tools/check_course.py` now allow code under `knowledge/languages/rust/<project>/`, in addition to `LEARN/<ID>/examples/`. Anything else under `knowledge/` is still refused. The checker ignores cargo `target/` output there. `tools/test_check_course.py`: two tests added (69 in total). `.gitignore` (new) ignores `target/` and `Cargo.lock` there. `.gitattributes`: LF for Rust, `.fuel` and `Cargo.toml` files.
+- `CLAUDE.md` Rust bullet reworded: never proactively assign, prompt, remind or create new Rust lessons or projects unasked; help fully when the learner asks.
+- `knowledge/languages/rust/README.md`: start page now leads to `fuel/`; `first-exploration.md` stays as an optional warm-up. `README.md`, `knowledge/README.md`, `ENVIRONMENT.md`: pointers and version note.
+
+**Unchanged.** `UNLOCKS/CATALOG.md` and its fingerprint, `PX-RUST-01`, `UNLOCKS/P0-BIT-06.md`, core sequencing, hours, phases, completion criteria, `KNOWLEDGE_STANDARD.md`. The track is not in `LEARNER_STATE.md`. Concept documents for language-independent ideas are still written only on request (`knowledge/README.md`); none were added.
+
+**Verified and not.** The author built and ran every project on Linux with rustc and cargo 1.97.0 (4 cores), applied each experiment, and quotes only observed compiler errors and outputs. `cargo test` in `05-parallel-runs`: 9 pass. Not run: Windows or PowerShell; any other Rust version; any run by the learner. The timing figures belong to one container. The guides link Rust Book chapters that the author did not read; each says so.
+
+**Choices to confirm or veto.** (1) Allowing Rust source under `knowledge/languages/rust/`. If vetoed, the projects move outside the repository and the guides become code blocks. (2) Edition 2021 and no external crates. (3) The choice of project.
+
+**Approval:** the learner's direction above. Items 1 to 3 may be reversed.
+
+---
+
+## D-011 — Rust projects finalized: narrowed code exception, lockfile policy, toolchain record (governance) — 2026-11-16 — status: applied at the learner's direction (supersedes parts of D-010)
+
+**Learner's direction.** Finalize the Fuel project: review everything, keep the code exception narrow and enforced, choose a lockfile policy, record the exact toolchain, separate verified Linux behavior from unverified Windows behavior, and publish to the approved branch.
+
+**Changed from D-010.**
+- **Code exception narrowed.** The checker allows only `.rs` and `Cargo.toml` files, and only one folder below `knowledge/languages/rust/` (`knowledge/languages/rust/<project>/...`). Code of other languages inside a Rust project, Rust files loose in `knowledge/languages/rust/`, and Rust files in other `knowledge/` folders are refused. `tools/test_check_course.py` gained `test_rust_exception_is_narrow` (70 tests); the test was shown to fail when the narrowing is removed. `CLAUDE.md` section 4 states the same scope.
+- **`Cargo.lock` is committed**, not ignored (D-010 ignored it). Reason: these are programs, and the lockfile reproduces the build. With no dependencies it holds only the package itself. It was written by Cargo 1.97.0; older Cargo versions may not read it (untested). `target/` stays ignored.
+- **Toolchain recorded.** Verified with `rustc 1.97.0 (2d8144b78 2026-07-07)` and `cargo 1.97.0 (c980f4866 2026-06-30)`, Linux x86_64, edition 2021. Recorded in `ENVIRONMENT.md` and `knowledge/languages/rust/fuel/README.md`. Windows/PowerShell 7, macOS and other Rust versions are explicitly unverified. No `rust-version` or `rust-toolchain` file was added, because no other version was tested.
+- **Guide corrections found by re-running every experiment** (a script, kept out of the repository, applied each documented change to a clean copy and checked the quoted output): exploration 1 said four type errors where the compiler gives three; exploration 2's speed-test snippet omitted the lines that call it; timing numbers were refreshed. PowerShell variants are marked untested.
+- **Exploration 5** gained a section separating deterministic execution (one run is a function of its inputs) from deterministic concurrent behavior (thread scheduling, which is not deterministic), and experiment H: in ten runs the job completion order varied (eight distinct orders) while stdout was identical in five further runs.
+- **Navigation** from the repository `README.md` through `knowledge/README.md` and the Rust start page to `fuel/` and each exploration now uses clickable relative links.
+
+**Unchanged.** `UNLOCKS/CATALOG.md`, its fingerprint, `PX-RUST-01`, the core curriculum, hours, `KNOWLEDGE_STANDARD.md`, `LEARNER_STATE.md`.
+
+**Not verified.** Windows and PowerShell; any Rust version other than 1.97.0; any run by the learner. Timing figures are from one 4-core container.
+
+**Approval:** the learner's direction above.

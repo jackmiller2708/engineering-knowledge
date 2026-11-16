@@ -1,0 +1,12 @@
+# Prints 5 4 3 2 1.
+push 5
+loop:
+  dup
+  print
+  push 1
+  sub
+  dup
+  jz done      # leave when the counter reaches 0
+  jmp loop
+done:
+  halt

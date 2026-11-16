@@ -51,6 +51,10 @@ RETIRED_NAMES = {"PROJECTS.md"}
 CODE_EXT = {".go", ".rs", ".ts", ".tsx", ".js", ".jsx", ".java", ".c", ".cpp", ".sql", ".py"}
 CODE_FILES = {"go.mod", "go.sum", "package.json", "Cargo.toml", "pom.xml"}
 EXAMPLE_CODE_OK = re.compile(r"^LEARN/[^/]+/examples/")  # teaching examples are the one place code may live
+# The one other exception (D-010, D-011): Rust leisure-track projects, `.rs` and `Cargo.toml` only,
+# one folder down: knowledge/languages/rust/<project>/...
+RUST_PROJECT = re.compile(r"^knowledge/languages/rust/[^/]+/")
+RUST_PROJECT_OK = lambda rel, p: bool(RUST_PROJECT.match(rel)) and (p.suffix == ".rs" or p.name == "Cargo.toml")
 FORBIDDEN_IN_BUNDLE = {"node_modules", ".git", "vendor", "target", "__pycache__", ".venv"}
 MISSING_OK_PREFIXES = ("project/design/", "EVIDENCE/", "ARCHIVE/", "knowledge/")
 TOP_DIRS = ("PHASES", "UNLOCKS", "TEMPLATES", "EVIDENCE", "ARCHIVE", "tools", "knowledge",
@@ -142,6 +146,8 @@ def check_structure():
         if ".git" in p.parts or not p.is_file():
             continue
         rel = p.relative_to(ROOT).as_posix()
+        if rel.startswith("knowledge/languages/rust/") and "target" in p.parts:
+            continue  # cargo build output of the learner's own runs (ignored by git)
         in_held = rel.startswith(("ARCHIVE/", "EVIDENCE/"))
         if p.name in RETIRED_NAMES and not in_held:
             err(f"{rel}: retired document name (its content moved; see DECISION_LOG D-004)")
@@ -149,9 +155,9 @@ def check_structure():
             err(f"{rel}: canonical location is {CANONICAL[p.name]}")
         is_code = p.suffix in CODE_EXT or p.name in CODE_FILES
         if is_code and not in_held and not (rel.startswith("tools/") and p.suffix == ".py") \
-                and not EXAMPLE_CODE_OK.match(rel):
+                and not EXAMPLE_CODE_OK.match(rel) and not RUST_PROJECT_OK(rel, p):
             err(f"{rel}: source code does not belong here (plans, design and evidence only; "
-                "teaching examples go under LEARN/<ID>/examples/)")
+                "teaching examples go under LEARN/<ID>/examples/; Rust projects under knowledge/languages/rust/<project>/)")
         if rel.startswith("EVIDENCE/") and p.name not in (".gitkeep",):
             parts = p.relative_to(ROOT / "EVIDENCE").parts
             if len(parts) < 3 and p.name != "README.md":
