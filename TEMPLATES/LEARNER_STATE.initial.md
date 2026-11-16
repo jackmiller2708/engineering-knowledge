@@ -22,6 +22,13 @@ Mastery achieved is the level actually demonstrated (L0–L5). An unlock counts 
 | ID | Started | Notes |
 |---|---|---|
 
+## Checkpoints
+
+Checkpoint 1 (after 25 actual hours), the end of every phase, and the critical checkpoint before Phase 3 (`CURRICULUM.md`). Findings cite actual work products and recorded hours.
+
+| Checkpoint | Date | Actual ÷ estimated hours | Findings | Recommendation | Learner decision |
+|---|---|---|---|---|---|
+
 ## Open gaps and re-checks
 
 (none)

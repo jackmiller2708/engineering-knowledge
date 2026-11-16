@@ -8,6 +8,8 @@ Lives at `EVIDENCE/<UNLOCK-ID>/<YYYY-MM-DD>-<n>/evaluation.md`, next to `manifes
 - **Evidence kind:** preserved | independently-reproduced (must equal the manifest)
 - **Manifest:** `manifest.md` in this directory
 - **Actual hours** (learner-reported): build __ / study __ / verify __ / consolidate __
+- **Guidance level used:** worked example only / partly completed problem / blank page (and the hints given)
+- **Evidence time:** hours spent producing and verifying this bundle: __
 
 ## Acceptance criteria
 | # | Criterion | Met? | Observed through (manifest command # or inspection) |
@@ -16,6 +18,11 @@ Lives at `EVIDENCE/<UNLOCK-ID>/<YYYY-MM-DD>-<n>/evaluation.md`, next to `manifes
 ## Mastery questions asked
 | Question | Level probed | Answer quality (unaided?) |
 |---|---|---|
+
+## Demonstrated versus told
+| Demonstrated by the learner's own work (reconstruction, independent application, unaided explanation) | Only read or told, not yet shown |
+|---|---|
+|  |  |
 
 ## Gaps found
 What is missing. Label statements as fact / observation / hypothesis.
