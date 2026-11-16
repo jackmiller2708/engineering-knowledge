@@ -28,7 +28,7 @@ The learner's workspace can hold more than one attempt at implementing a project
 
 | Attempt | Project area | Description of the workspace area | Started | Status |
 |---|---|---|---|---|
-| 1 | PRJ-LABS, PRJ-ENGINE | to be described by the learner at the start of `P0-GO-01` | not started | planned |
+| 1 | PRJ-LABS, PRJ-ENGINE | Separate working folders on a Linux machine (home) and a Windows machine (work). Not assumed to be version-controlled, and nothing in this course synchronises the two. | 2026-11-16 | in progress (`P0-GO-01`) |
 
 ## Keeping the course portable without the workspace
 

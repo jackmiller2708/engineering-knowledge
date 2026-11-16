@@ -32,14 +32,16 @@ APPROVAL_KEYS = ("status", "approved_by", "approved_on", "approved_commit", "app
 
 
 def reset_to_proposed(root):
-    """Make the temporary copy's CURRICULUM.md header PROPOSED, whatever the real repository
-    says, so each test starts from one known state and does not depend on approval status."""
+    """Make the temporary copy start from one known state (header PROPOSED, no learner progress),
+    whatever the real repository says, so tests do not depend on approval status or progress."""
     p = root / "CURRICULUM.md"
     t = p.read_text()
     m = re.match(r"---\n(.*?)\n---\n", t, re.S)
     keep = [l for l in m.group(1).splitlines() if l.split(":")[0].strip() not in APPROVAL_KEYS]
     head = "status: PROPOSED\napproved_by: none\napproved_on: none\ncatalog_fingerprint: none\n"
     p.write_text("---\n" + head + "\n".join(keep) + "\n---\n" + t[m.end():])
+    # Learner progress belongs to the live repository, not to the tests: start from the initial state.
+    shutil.copy(root / "TEMPLATES" / "LEARNER_STATE.initial.md", root / "LEARNER_STATE.md")
 
 
 def make_copy(as_recorded=False):

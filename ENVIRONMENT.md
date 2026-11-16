@@ -8,7 +8,7 @@ Owner: learner requests changes. Status of every entry below: **unvalidated prop
 2. Never assume a tool exists because it existed before. Run its verification command.
 3. Use official installers or package managers. Follow each tool's own current instructions; this file does not reproduce them because they change.
 4. No machine-specific paths in this repository. Use environment variables or relative paths and document them here.
-5. Supported platforms: **Linux**, **macOS**, **Windows via WSL2** (Ubuntu). Native Windows is not supported for the course tooling.
+5. Supported platforms: **Linux** (primary; any distribution, no distribution-specific steps), **Windows 11/10 with PowerShell 7** (native, for Go and course work), macOS, and WSL2. Instructions give both a Linux (Zsh) and a Windows (PowerShell 7) form where they differ. A tool that is Linux-only (for example `strace`) is marked as such in the table below, and the unlock offers the Linux machine, WSL2 or a Linux container. **Native Windows has not been validated by any run yet.** Where `python3` is not defined on Windows, `py -3` or `python` is expected to work; this is also unvalidated.
 
 ## Tools
 
@@ -33,8 +33,10 @@ Tell the learner what is needed and why (one sentence), give the official source
 
 ## Environment record
 
-Learner OS, hardware and resource limits are unknown. Ask at the start of `P0-GO-01` and record them here with the learner's approval:
+Reported by the learner on 2026-11-16, at the start of `P0-GO-01`:
 
-- OS: unknown
-- CPU/RAM: unknown
-- Docker available: unknown
+- OS: **Linux** at home (primary; no particular distribution; shell Zsh) and **Windows** at work (shell PowerShell 7).
+- Portability: the learner wants the workflow to stay portable across both. Linux is the primary environment for the initial Go work.
+- CPU/RAM: unknown.
+- Docker: beginner (understands the purpose, little hands-on use). Whether it is installed is unknown.
+- Go: no prior experience. Whether it is installed on either machine is unknown until the learner runs `go version`.
