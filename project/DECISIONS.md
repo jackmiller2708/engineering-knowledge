@@ -29,3 +29,7 @@ Owner: learner approves; Claude proposes. Append-only. Architecture decisions fo
 - **Why:** An earlier wording ("no step is executed and committed twice") read as exactly-once execution, which contradicts at-least-once. The commit and the execution are different events with different guarantees.
 - **Consequences:** Request idempotency (`P2-IDEM-01`) and effect idempotency (`P2-CONS-01`) are separate unlocks with separate keys. Chaos tests (`P3-TST-01`) check commits and effects, not only commits. Completion criteria C2 and C3 were rewritten to match.
 - **Evidence still needed:** whether the idempotency contract is realistic for the external systems the learner cares about is an assumption; the fake external system in `P2-CONS-01` only models it.
+
+## Status update (D-007, 2026-11-16)
+
+PD-001 to PD-004 were approved with the curriculum on 2026-11-16 (`DECISION_LOG.md` D-007). Approval authorizes the work to begin; it does not validate the decisions. They remain hypotheses until implemented and tested. The entries above are unchanged.

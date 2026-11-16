@@ -1,6 +1,6 @@
 # Workflow Platform Plan (PRJ-ENGINE)
 
-Owner: learner approves; Claude proposes. Status: **PROPOSED** (part of the unapproved curriculum). This is the plan for the project the course builds. It holds plans, scope, architecture decisions and milestones, not source code. Where the code lives: `project/README.md`.
+Owner: learner approves; Claude proposes. Status: **APPROVED** with the curriculum on 2026-11-16 (D-007). The architecture and acceptance criteria below are hypotheses until implemented and tested. This is the plan for the project the course builds. It holds plans, scope, architecture decisions and milestones, not source code. Where the code lives: `project/README.md`.
 
 ## Purpose
 

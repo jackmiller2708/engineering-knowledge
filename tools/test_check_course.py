@@ -7,6 +7,7 @@ fixture, applies ONE deliberate error, and runs the real checker as a subprocess
 Nothing in the real repository is modified.
 """
 import hashlib
+import re
 import shutil
 import subprocess
 import sys
@@ -26,9 +27,26 @@ def run(root, *args):
     return p.returncode, p.stdout, p.stderr
 
 
-def make_copy():
+APPROVAL_KEYS = ("status", "approved_by", "approved_on", "approved_commit", "approved_base",
+                 "approved_branch", "catalog_fingerprint")
+
+
+def reset_to_proposed(root):
+    """Make the temporary copy's CURRICULUM.md header PROPOSED, whatever the real repository
+    says, so each test starts from one known state and does not depend on approval status."""
+    p = root / "CURRICULUM.md"
+    t = p.read_text()
+    m = re.match(r"---\n(.*?)\n---\n", t, re.S)
+    keep = [l for l in m.group(1).splitlines() if l.split(":")[0].strip() not in APPROVAL_KEYS]
+    head = "status: PROPOSED\napproved_by: none\napproved_on: none\ncatalog_fingerprint: none\n"
+    p.write_text("---\n" + head + "\n".join(keep) + "\n---\n" + t[m.end():])
+
+
+def make_copy(as_recorded=False):
     tmp = Path(tempfile.mkdtemp(prefix="coursecheck-"))
     shutil.copytree(REPO, tmp / "r", ignore=shutil.ignore_patterns(".git", "__pycache__"))
+    if not as_recorded:
+        reset_to_proposed(tmp / "r")
     return tmp / "r"
 
 
@@ -110,6 +128,44 @@ class Base(unittest.TestCase):
         self.assertEqual(code, 0, f"expected exit 0\nstdout:{out}\nstderr:{err}")
         self.assertNotIn("ERROR:", err)
         return out
+
+
+class ApprovedStateAsRecorded(unittest.TestCase):
+    """The repository exactly as it is recorded (not reset). Skipped if it is not approved."""
+
+    def setUp(self):
+        self.root = make_copy(as_recorded=True)
+        self.addCleanup(shutil.rmtree, self.root.parent, ignore_errors=True)
+        self.head = (self.root / "CURRICULUM.md").read_text()
+        if not re.search(r"^status: APPROVED$", self.head, re.M):
+            self.skipTest("repository is not in the APPROVED state")
+
+    def test_recorded_state_passes_in_every_mode(self):
+        for mode in ([], ["--status"], ["--budget"], ["--mermaid"], ["--fingerprint"]):
+            code, out, err = run(self.root, *mode)
+            self.assertEqual(code, 0, f"{mode}\n{err}")
+            self.assertNotIn("ERROR:", err)
+
+    def test_approval_record_is_complete(self):
+        for key, pattern in (("approved_commit", r"[0-9a-f]{40}"), ("approved_base", r"[0-9a-f]{40}"),
+                             ("catalog_fingerprint", r"[0-9a-f]{64}"), ("approved_on", r"\d{4}-\d{2}-\d{2}"),
+                             ("approved_branch", r"\S+")):
+            self.assertRegex(self.head, rf"(?m)^{key}: {pattern}$", key)
+        _, fp, _ = run(self.root, "--fingerprint")
+        self.assertIn(fp.splitlines()[0], self.head)
+
+    def test_a_wrong_recorded_fingerprint_is_caught(self):
+        p = self.root / "CURRICULUM.md"
+        p.write_text(re.sub(r"(?m)^catalog_fingerprint: [0-9a-f]{64}$", "catalog_fingerprint: " + "0" * 64, self.head))
+        code, _, err = run(self.root)
+        self.assertEqual(code, 1)
+        self.assertIn("catalog boundaries", err)
+
+    def test_standard_is_still_the_supplied_file(self):
+        add = (self.root / "KNOWLEDGE_STANDARD_ADDENDUM.md").read_text()
+        pinned = re.search(r"Pinned sha256: `([0-9a-f]{64})`", add).group(1)
+        self.assertEqual(sha((self.root / "KNOWLEDGE_STANDARD.md").read_bytes()), pinned)
+        self.assertIn("Status: Proposed", (self.root / "KNOWLEDGE_STANDARD.md").read_text())
 
 
 class RealRepository(Base):

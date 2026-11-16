@@ -1,6 +1,6 @@
 # Course Objective
 
-Owner: learner (changes need explicit approval). Status: **PROPOSED** (see `CURRICULUM.md`). Revision 2 (D-002).
+Owner: learner (changes need explicit approval). Status: **APPROVED** 2026-11-16 (see `CURRICULUM.md` and D-007). Approval authorizes the course to begin; the project's designs and acceptance criteria remain hypotheses until implemented and tested.
 
 ## Mission
 

@@ -4,7 +4,7 @@ This repository is a single, self-contained learning workspace for a long-term e
 
 It does **not** hold the platform's source code. The learner's working code lives in their own workspace (see `project/README.md`).
 
-**Status: curriculum PROPOSED (revision 2), not approved.** No teaching happens until the learner approves it (see `DECISION_LOG.md`). Start with `REVIEW_REPORT.md`.
+**Status: curriculum APPROVED on 2026-11-16** (revision 4, commit `93e5a018d75b8c67036462e1a8a146a020ef5908`; see `DECISION_LOG.md` D-007). Approval authorizes the course to begin; it does not mean the designs, estimates or career conclusions are validated. Start with `SESSION_HANDOFF.md`.
 
 ## Mission
 

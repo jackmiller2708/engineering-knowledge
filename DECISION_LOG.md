@@ -122,3 +122,39 @@ Entry types: `design`, `approval`, `change`, `restart`, `governance`.
 **Not changed:** every other curriculum file apart from this entry and a minimal correction to `SESSION_HANDOFF.md`.
 
 **Approval:** pending. Nothing here approves the curriculum.
+
+## D-007 — Curriculum approved; D-003 confirmed and reconciled with D-004; teaching workflow and checkpoints adopted (approval, governance) — 2026-11-16 — status: APPROVED
+
+**Approval.** The learner approved the curriculum candidate and authorized the move from PROPOSED to APPROVED.
+
+| | |
+|---|---|
+| Approved branch | `review/final-curriculum-candidate` |
+| Approved commit | `93e5a018d75b8c67036462e1a8a146a020ef5908` |
+| Base of that candidate | `6e1b12ae18ce1af2458d2fcadaa9092472cd7903` |
+| Approval date | 2026-11-16 |
+| Catalog fingerprint recorded | `d28afa7b918bda26c5780f862edbae4f812fe07d4c14af9c03910eb3143b381e` |
+
+**Verified before approving.** The checked-out branch and `HEAD` were that exact commit; its parent was the named base; the working tree was clean; the remote branch pointed at the same commit. `KNOWLEDGE_STANDARD.md` had the same sha256 (`223f2e52…2f8a`) in the base commit, the candidate commit, the working tree, the learner's original upload and the addendum's pin. The checker and its tests passed on that state. Nothing was substituted.
+
+**What approval means.** The curriculum is authorized to begin. It does not mean that its technical designs, hour estimates, acceptance criteria or career-market conclusions have been validated. They remain hypotheses until implemented, measured or read. Unexecuted criteria are not passed criteria.
+
+**D-003 confirmed, reconciled with D-004.** The learner accepts the reconciliation of `KNOWLEDGE_STANDARD_ADDENDUM.md` with the standard recorded in D-003: the standard is canonical, the addendum holds only extensions and the directory mapping, and the standard's hash is pinned. D-004 established the single-repository approach: the one repository is `engineering-knowledge`, and the standard's logical domains (knowledge, projects, career) are directories inside it (`knowledge/`, `project/`, `career/`), not separate repositories. D-004 had already superseded the "Unresolved" paragraph of D-003 and its interim rules; this entry confirms what remained. No earlier entry is rewritten. The statuses of D-001 to D-006 that read PROPOSED are superseded by this entry for everything contained in the approved commit.
+
+**The knowledge standard.** Unchanged, including its own header status "Proposed". Approving the curriculum does not change the status of the standard.
+
+**Teaching workflow made operational (`CLAUDE.md` sections 1, 3, 4, 5; `TEMPLATES/LESSON.md`, `TEMPLATES/EVALUATION.md`, `TEMPLATES/LEARNER_STATE.initial.md`).** For each new concept: problem; mental picture; mechanism; worked example; reconstruction; independent application; explanation. Rules added: understanding rather than familiarity; change the representation rather than add vocabulary; theory when it becomes useful; fade guidance; return to the earliest unresolved prerequisite; keep what the learner demonstrated apart from what they were told. The terminology is not taught to the learner and no separate theory document exists.
+- *Decision made while implementing:* the worked example is a solution to a **neighboring problem**, never to the unlock's own challenge. This keeps the existing rule that the challenge's solution is not handed over, while still showing a correct solution. The learner reconstructs it, then solves the real challenge independently.
+- Evaluations now record the guidance level, the evidence time, and a "demonstrated versus told" table.
+
+**Retention and transfer.** No-notes recall at session start, spaced revisits, reuse of earlier concepts, and unfamiliar variations. They sit inside each unlock's consolidate time. No hours were added and the essential budget is unchanged.
+
+**Checkpoints (`CURRICULUM.md`, "Checkpoints"; `PHASES/PHASE-3.md`).** Checkpoint 1 after 25 **actual** study hours (this replaces the revision-4 definition of "27 estimated hours"), reviewing six named items from actual work products. An evaluation at the end of every phase that keeps completed work, demonstrated understanding, independently reproduced results, unresolved gaps and unverified assumptions apart. A critical checkpoint before Phase 3, recorded as an entry check in `PHASES/PHASE-3.md`: Phase 3 does not start on weak foundations, and slippage is handled by reserve, extra hours or a proposed cut. Records go in the Checkpoints table of `LEARNER_STATE.md`.
+
+**Known risks carried forward (`CURRICULUM.md`, R1 to R5).** The roughly 38 h unprotected reserve; the 9 h estimate of `P2-CONS-01` (variance above 25% is reported); incomplete career research (42 search-result pointers are not 42 reviewed postings, and no specialization is forced); architecture and acceptance criteria as hypotheses; no bundle called independently reproduced before it is rerun.
+
+**Unchanged.** The ultimate objective and September 2027 target; the 10 h/week baseline (maximum weekend time is not the commitment); the essential plan of 362 h; optional material stays optional; capability objectives; phase boundaries; acceptance criteria; the catalog fingerprint. Phase dates in `PHASES/` keep their "(proposed)" label: they remain planning estimates.
+
+**Tooling.** `tools/test_check_course.py` hard-coded the PROPOSED header, so approval broke 23 of its 50 tests. The tests now reset each temporary copy to a known state, and four tests cover the approved state as recorded (54 tests). `tools/check_course.py` was not changed. The checker does not validate the `approved_commit`, `approved_base` or `approved_branch` fields; a test checks that they are present and well formed.
+
+**Not done, by instruction.** No commit, push, merge, pull request, release or tag; no other repository; no source code moved into this repository; `KNOWLEDGE_STANDARD.md` untouched.

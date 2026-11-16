@@ -12,7 +12,7 @@ Race detection and shared-state invariants; safe job claiming; leases with heart
 Concurrency, synchronization, queues, coordination, delivery semantics. "Distributed" here means multiple processes sharing one PostgreSQL. This is stated plainly; it does not cover replicated data stores or consensus.
 
 ## Dependencies
-Phase 2 (`P2-REC-01`, `P2-FAIL-01`), plus `P0-GO-03`.
+Phase 2 (`P2-REC-01`, `P2-FAIL-01`), plus `P0-GO-03`. **Entry check:** the critical checkpoint before Phase 3 (`CURRICULUM.md`, "Checkpoints") must be recorded as passed in `LEARNER_STATE.md`. Phase 3 is not started without it.
 
 ## Expected deliverables
 Multi-worker engine, lease and fencing implementation, chaos test suite covering commits and effects, delivery-guarantee document.

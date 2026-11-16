@@ -40,7 +40,7 @@ Next unlocks lists each unlock this one enables and why. The checker confirms ea
 
 ## Just-in-time authoring
 
-Before the curriculum is approved, no unlock is authored or edited. The 14 unlocks authored so far are examples that are part of the proposal. After approval (`CURRICULUM.md` status `APPROVED`), Claude may author a *planned* unlock without further approval, when it is the learner's likely next choice, if it stays inside these **frozen boundaries**, all taken from `CATALOG.md` and the phase files:
+The 14 unlocks authored so far were written before approval and are approved with the curriculum (D-007). The curriculum is approved, so Claude may author further unlocks as described next. Before approval no unlock was authored or edited. After approval (`CURRICULUM.md` status `APPROVED`), Claude may author a *planned* unlock without further approval, when it is the learner's likely next choice, if it stays inside these **frozen boundaries**, all taken from `CATALOG.md` and the phase files:
 
 1. Identity and objective: the unlock ID and its catalog title.
 2. Prerequisites (`Requires`).

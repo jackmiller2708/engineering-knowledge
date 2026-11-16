@@ -1,14 +1,17 @@
 ---
-status: PROPOSED
-approved_by: none
-approved_on: none
-catalog_fingerprint: none
+status: APPROVED
+approved_by: the learner
+approved_on: 2026-11-16
+approved_commit: 93e5a018d75b8c67036462e1a8a146a020ef5908
+approved_base: 6e1b12ae18ce1af2458d2fcadaa9092472cd7903
+approved_branch: review/final-curriculum-candidate
+catalog_fingerprint: d28afa7b918bda26c5780f862edbae4f812fe07d4c14af9c03910eb3143b381e
 cut_order: P5-PY-01,P5-LLM-01,P5-AI-01,P5-INT-01 | P6-PERF-01 | P0-INT-01
 ---
 
 # Curriculum
 
-Owner: learner approves; Claude proposes. `status` values: `PROPOSED` → `APPROVED`. Only the learner's explicit approval changes it, and the change is logged in `DECISION_LOG.md`. At approval, also record `approved_by`, `approved_on` and `catalog_fingerprint` (the output of `python3 tools/check_course.py --fingerprint`) in the header above; the checker then fails if the catalog's boundary columns change without an approved update. Revision 4 (see D-002, D-005). Not approved; nothing may be taught.
+Owner: learner approves; Claude proposes. `status` values: `PROPOSED` → `APPROVED`. Only the learner's explicit approval changes it, and the change is logged in `DECISION_LOG.md`. At approval, also record `approved_by`, `approved_on` and `catalog_fingerprint` (the output of `python3 tools/check_course.py --fingerprint`) in the header above; the checker then fails if the catalog's boundary columns change without an approved update. Revision 4 (see D-002, D-005). **Approved 2026-11-16** at commit `93e5a018d75b8c67036462e1a8a146a020ef5908` on `review/final-curriculum-candidate` (base `6e1b12ae18ce1af2458d2fcadaa9092472cd7903`), recorded in D-007. Approval authorizes the curriculum to begin. It does not mean its designs, estimates, acceptance criteria or career conclusions have been validated (see "Known risks carried forward").
 
 ## Study capacity (decided by the learner, D-002)
 
@@ -17,6 +20,8 @@ Owner: learner approves; Claude proposes. `status` values: `PROPOSED` → `APPRO
 - Extra hours are used, in order: (1) to finish the current unlock without borrowing from the reserve, (2) to absorb difficult challenges, (3) to take optional unlocks, in the order listed under "When ahead".
 
 **Suggested weekly rhythm** (a default, not a rule): one longer weekend block (4–5 h) for building, one shorter block (3 h) for experiments and reading, one block (2 h) for verification and notes.
+
+**Retention and transfer fit inside these hours.** Short no-notes recall at the start of a session, spaced revisits of earlier concepts, reuse of earlier concepts in later tasks, and occasional unfamiliar variations are part of each unlock's consolidate time. They add no hours and no separate workload. The maximum possible weekend time is not the expected weekly commitment: 10 hours a week is the baseline, and extra time is optional acceleration, depth or schedule recovery.
 
 ## Time budget
 
@@ -77,12 +82,31 @@ The earlier proposal totalled about 440 hours by a rough count. I did not compre
 | Correction pass (D-005): `P2-CONS-01` widened to step-effect idempotency and delivery guarantees (was a 6 h write-up, now 9 h with the effect experiments) | +3 | Request idempotency alone does not stop a retried step repeating an external effect; both are now taught and demonstrated. |
 | Correction pass (D-005): `P0-CAR-01` narrowed to an initial snapshot (at least 6 direct records per direction) and re-estimated from 5 h to 7 h | +2 | Honest effort for the scope; the decision between directions is not forced. |
 
-### Re-measuring (recalibration)
+### Checkpoints
+
+Hours are re-measured and capability is checked at fixed points. Findings come from actual work products and recorded hours, not impressions. Each checkpoint is recorded in the Checkpoints table of `LEARNER_STATE.md`. Recommendations go to the learner. The essential scope, estimates and frozen boundaries change only through the approved change process (`CLAUDE.md` section 6).
 
 Record actual hours for every completed unlock in `LEARNER_STATE.md`.
-- **Checkpoint 1:** after the first 27 estimated hours (`P0-CAR-01` 7, `P0-GO-01` 6, `P0-GO-02` 7, `P0-GO-03` 7). Compute actual ÷ estimated.
-- **Checkpoint 2:** end of each phase.
-- ≤ 1.10: on track. 1.10–1.25: use reserve, restate the remaining plan. > 1.25: curriculum review: propose moving essential unlocks to optional, in the cut order below.
+
+**Checkpoint 1: after 25 actual study hours.** Triggered by cumulative actual hours, whichever unlocks they fall in, not by a list of unlocks. Review:
+1. Actual hours against estimates, per unlock and overall.
+2. Whether the learner forms accurate mental models of new concepts, from the reconstruction and explanation results.
+3. Whether the examples and visual representations are helping, and which kinds work.
+4. How much guidance is needed before independent implementation (the guidance level recorded in each evaluation).
+5. The time needed to produce and verify an evidence bundle.
+6. Whether the workload is sustainable at 10 hours a week.
+
+**End of every phase.** Evaluate demonstrated capability against that phase's existing exit criteria in `PHASES/PHASE-N.md`. Keep these apart in the record: work completed; understanding demonstrated; results independently reproduced (bundles marked `independently-reproduced`, as opposed to `preserved`); unresolved knowledge gaps; unverified assumptions. Mastery is never awarded for task completion alone.
+
+**Critical checkpoint: before Phase 3.** This is the Phase 2 end-of-phase checkpoint with a stricter test. Phase 3 adds concurrency and distribution, so it does not start until this checkpoint is recorded as passed. Check, from the learner's own explanations and applications without notes, that the execution and reliability foundations hold:
+- transaction boundaries and isolation (`P1-PG-03`, `P1-SM-02`);
+- the state machine and its invariants (`P1-SM-01`);
+- request idempotency, step-effect idempotency and the crash window (`P2-IDEM-01`, `P2-CONS-01`);
+- retries, timeouts and recovery from saved state (`P2-RET-01`, `P2-TMO-01`, `P2-REC-01`) and failure injection (`P2-FAIL-01`);
+- G1–G4 explained, with the crash points applied to a new variation.
+If a foundation is weak, repair it first, starting from the earliest unresolved prerequisite, even if the schedule slips. Slippage is handled with the reserve, extra hours or a proposed cut, never by starting Phase 3 on weak foundations.
+
+**Reading the hours.** Overall actual ÷ estimated: up to 1.10 is on track; 1.10 to 1.25 uses the reserve and the remaining plan is restated; above 1.25 triggers a curriculum review that may propose moving essential unlocks to optional, in the cut order below. Any unlock whose actual hours exceed its estimate by more than 25% is reported when it is completed.
 
 ### If behind: cut order (each is a proposal needing approval)
 
@@ -105,6 +129,18 @@ Total 35 h. **Only C6 can be waived.** C1–C5, C7 and C8 stay reachable under e
 5. `P5-LLM-02` Tool calling
 6. `P0-DS-02/03/04`, `P0-MEM-01`, `P0-NET-02`, remaining optional items
 7. Stretch: `PX-UI-01`, `PX-RUST-01`, `PX-REPLAY-01`
+
+## Known risks carried forward
+
+Approval does not retire these. They stay visible until the evidence says otherwise.
+
+| # | Risk | What is done about it |
+|---|---|---|
+| R1 | The unprotected reserve is about 38 h (10%), and only 5 h in Phase 2. | Watch the hours ratio at every checkpoint. Do not assume overruns recover by themselves; use extra hours, the reserve, or a proposed cut. |
+| R2 | The 9 h estimate for `P2-CONS-01` may be optimistic. Its acceptance criterion 4 implies several crash-point cases. | Measure the actual hours. Report any variance above 25% when the unlock is completed. A change to the estimate is a proposal that needs approval. |
+| R3 | The career research is incomplete. The 42 search-result pointers are not 42 reviewed postings, and none has been read. | Read actual postings in `P0-CAR-01` before drawing strong conclusions. Do not force a specialization decision before the evidence supports one. |
+| R4 | The platform's architecture and acceptance criteria are hypotheses until implemented and tested. | State results as observed, not assumed. Unexecuted criteria are never reported as passed. |
+| R5 | No evidence bundle has been independently reproduced. | A bundle is called `independently-reproduced` only after its commands have been rerun in a clean environment and the results verified. |
 
 ## Workflow execution model (decided, D-002)
 
