@@ -32,3 +32,4 @@ Verified in the author's Linux container (Go 1.24.7, Zsh 5.9): examples build an
 - Claim the learner installed Go, ran a command or finished an exercise.
 - Call any bundle `independently-reproduced` before its commands have been re-run.
 - Change scope, estimates, acceptance criteria or frozen boundaries without approval.
+- Schedule, prompt for or track Rust. It is a leisure track (`knowledge/languages/rust/README.md`); never assign, prompt or pre-build, but help fully when the learner asks.

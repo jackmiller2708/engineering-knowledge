@@ -128,7 +128,7 @@ Total 35 h. **Only C6 can be waived.** C1–C5, C7 and C8 stay reachable under e
 4. `P4-IAC-01` Terraform basics; `P4-LNX-01` Linux operations
 5. `P5-LLM-02` Tool calling
 6. `P0-DS-02/03/04`, `P0-MEM-01`, `P0-NET-02`, remaining optional items
-7. Stretch: `PX-UI-01`, `PX-RUST-01`, `PX-REPLAY-01`
+7. Stretch: `PX-UI-01`, `PX-REPLAY-01`. (Rust is a separate leisure track, not part of this list: `knowledge/languages/rust/README.md`.)
 
 ## Known risks carried forward
 

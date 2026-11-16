@@ -23,6 +23,7 @@ Capabilities are unlocked by doing, not by reading. Each unit (an *unlock*) is a
 | Resuming after a break | `PROCEDURES.md` → "Resume" |
 | Starting over | `PROCEDURES.md` → "Restart" |
 | Setting up tools | `ENVIRONMENT.md` |
+| The learner, exploring Rust for fun (optional, outside the course) | `knowledge/languages/rust/README.md` |
 
 ## Document map (one owner per fact)
 
@@ -38,7 +39,7 @@ Capabilities are unlocked by doing, not by reading. Each unit (an *unlock*) is a
 | `project/DECISIONS.md` | Platform architecture decisions |
 | `project/README.md` | Project areas, workspace, evidence bundles |
 | `project/design/` | Design documents the learner writes (created on first use) |
-| `knowledge/` | Canonical concept documents (created on demand) |
+| `knowledge/` | Canonical concept documents (created on demand). Rust leisure track: `knowledge/languages/rust/README.md` |
 | `UNLOCKS/<ID>.md` | Full definition of one challenge |
 | `LEARN/<ID>/` | The self-paced learning material for one unlock, prepared in full before the learner begins. Start at its `README.md` |
 | `LEARNER_PROFILE.md` | Stable preferences and career context |

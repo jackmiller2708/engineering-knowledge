@@ -25,7 +25,7 @@ Versions are minimums chosen for features the course uses. Check them against of
 | `strace` | Observe system calls | any | `strace -V` | `P0-OS-01` | **Linux only.** macOS: use a Linux VM, WSL2, or a Linux container | — |
 | kind or k3d + `kubectl` | Local Kubernetes | current stable | `kubectl version --client`; `kind version` | `P4-K8S-01` | Needs Docker | — |
 | OpenTelemetry tooling | Traces/metrics | per unlock | per unlock | `P4-OBS-02` | — | — |
-| Rust (`rustup`, `cargo`) | Stretch only | stable | `cargo --version` | `PX-RUST-01` | — | — |
+| Rust (`rustup`, `cargo`) | Optional leisure track | stable | `cargo --version` | when the learner chooses to explore Rust | — | — |
 
 ## When a tool is missing
 

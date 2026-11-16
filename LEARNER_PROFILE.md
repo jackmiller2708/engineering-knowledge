@@ -14,7 +14,7 @@ Owner: learner. Stable facts only. Progress belongs in `LEARNER_STATE.md`.
 |---|---|
 | Professional | TypeScript |
 | Main backend/systems expansion | Go |
-| Exploratory (off the critical path) | Rust |
+| Leisure exploration, no obligations (`knowledge/languages/rust/README.md`) | Rust |
 | AI integration and tooling | Python |
 
 ## Career context

@@ -183,3 +183,23 @@ Entry types: `design`, `approval`, `change`, `restart`, `governance`.
 **Correction to an earlier statement.** At the end of the previous session I reported that the checker and all 54 tests passed. The command I used printed only the `Ran 54 tests` line, and 3 tests were in fact failing: each test copy reset the approval header but not the learner state, so the new in-progress record made them fail. This was found while preparing the publish and fixed in `8ecf14b`; the suite is now run and read in full.
 
 **Approval:** the learner's direction above. Items 1 to 3 may be reversed by the learner.
+
+---
+
+## D-009 — Rust becomes a leisure track outside the core plan (governance) — 2026-11-16 — status: applied at the learner's direction
+
+**Learner's direction.** Rust is a self-directed, curiosity-driven, parallel track. It has no mandatory hours, deadlines, order, progress reporting, credentials or mastery requirements, and no effect on core completion. No Rust course, new unlock or progress-tracking system is added.
+
+**Applied.**
+- New `knowledge/languages/rust/README.md`: the single document for the track (what it is and is not, pause and resume, how help works, precise guarantees, directions that are not a checklist, capability-based success, `PX-RUST-01` as an optional exercise).
+- `LEARNER_PROFILE.md`, `ENVIRONMENT.md`, `KNOWLEDGE_STANDARD_ADDENDUM.md`, `knowledge/README.md`: wording changed from "stretch/exploratory" to the leisure track, with a pointer.
+- `CURRICULUM.md`: `PX-RUST-01` removed from the "When ahead" list (it is no longer something to schedule), with a pointer to the track document.
+- `CLAUDE.md` section 4 and `SESSION_HANDOFF.md`: one line each. Rust is not an unlock; do not prompt, schedule or track it; do not pre-build material.
+
+**Unchanged.** `UNLOCKS/CATALOG.md` (including the `PX-RUST-01` row and its 5+2+1+0 hours, which are a rough size reference only), `UNLOCKS/P0-BIT-06.md`, the catalog fingerprint, core sequencing, essential unlocks, prerequisites, hours, phase boundaries, completion criteria, `KNOWLEDGE_STANDARD.md`.
+
+**Time budget.** Rust time is outside the 10 h/week plan and the 362 h essential total. Nothing is taken from the reserve.
+
+**Not validated.** No Rust toolchain was installed or run. The track document contains no commands that need verifying.
+
+**Approval:** the learner's direction in this conversation.

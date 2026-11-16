@@ -13,7 +13,7 @@ The standard's own status line reads "Proposed". The learner has directed that i
 | Standard section | How this course uses it |
 |---|---|
 | §1–2 Philosophy, understanding model | Governs teaching. Each unlock's challenge and questions should reach underlying reality, model, mechanism and consequences, not only a working program. |
-| §2.5 Languages | Show TypeScript / Go / Rust contrasts only where they teach something language-independent vs language-specific. Rust is a stretch track. Never force all three. |
+| §2.5 Languages | Show TypeScript / Go / Rust contrasts only where they teach something language-independent vs language-specific. Rust is a leisure track with no obligations (`knowledge/languages/rust/README.md`). Never force all three. |
 | §3 Concept document structure, §12 Complete module | Applies to **concept documents**. See "Boundaries inside this repository" below. Unlock files are challenge definitions, not concept documents; they stay short and link to concept documents when those exist. |
 | §4.2 Analogies | Any analogy used in teaching names what maps, where it helps, where it breaks, and moves to the real model. |
 | §5 Classification | Keep theory, practice, evidence and judgment distinguishable in anything written. |
