@@ -243,3 +243,36 @@ Entry types: `design`, `approval`, `change`, `restart`, `governance`.
 **Not verified.** Windows and PowerShell; any Rust version other than 1.97.0; any run by the learner. Timing figures are from one 4-core container.
 
 **Approval:** the learner's direction above.
+
+---
+
+## D-012 — Learning Environment application is a separate repository (governance) — 2026-11-17 — status: applied at the learner's direction
+
+**Source.** Owner decisions of 2026-11-17, given as task instructions. They are not part of the curriculum approved in D-007 (that approval covers commit `93e5a018d75b8c67036462e1a8a146a020ef5908`, which predates them).
+
+**Relation to earlier decisions.** D-004 and D-007 are unchanged. D-004 (confirmed in D-007) says the course is one repository and that a separate repository is only an optional future decision. This entry makes one such decision, for one product only. It narrows D-004 item 1 ("exactly one repository") and item 5 ("never a current dependency") for the Learning Environment application. Everything else in D-004 still applies. D-004 describes working code in the learner's own workspace; that remains true for the platform and lab areas.
+
+**Learner decisions received (inputs).**
+1. This repository keeps owning concepts, curriculum, learning-platform plans and product architecture decisions.
+2. The Engineering Learning Environment application is a separate implementation and delivery platform. It has its own Git repository, inside the `engineering-projects` repository of the workspace, under `projects/engineering-learning-environment`. It has no remote and is not a submodule. The workspace-level record of the placement is entry WD-005 in the workspace decision log ("Engineering Learning Environment is an independent repository under engineering-projects"). That log is outside this repository.
+3. The application references this repository's content. It does not copy it.
+4. The application repository is **not** a prerequisite for reading or maintaining the curriculum.
+
+**Rust boundary (decided by the learner, 2026-11-17; D-009, D-010 and D-011 are unchanged; same as LE-004).**
+1. Rust is an implementation technology used by the application. It is the application's native implementation technology (the Tauri 2 native layer).
+2. Rust proficiency is not required to follow the core curriculum or to use the application.
+3. The optional Rust leisure track (D-009 to D-011) remains independent of the Learning Environment. Application work does not schedule, replace or count toward it.
+4. Application development creates no learner mastery requirements, unlocks, hours, deadlines or progression gates.
+5. The application implementation and the learner's Rust education are separate concerns. Rust as the application's technology and Rust as an optional subject a learner may explore on their own are different things.
+6. Unknown, not decided here: who writes the native layer, and how much Rust it needs.
+
+**Applied.**
+- Product plan and decisions: `project/learning-environment/` (`README.md`, `LE-PLAN.md`, `LE-DECISIONS.md`). The `LE-` file names avoid the checker's canonical names `PLAN.md` and `DECISIONS.md`.
+- `project/README.md`: the sentence "nothing here depends on any other repository" is rescoped, and a short "Learning Environment" section is added.
+- The Go/PostgreSQL platform (PRJ-ENGINE) is unchanged: `project/PLAN.md` and `project/DECISIONS.md` were not edited.
+
+**Not changed.** `KNOWLEDGE_STANDARD.md` (status "Proposed", hash pinned), `KNOWLEDGE_STANDARD_ADDENDUM.md`, D-001 to D-011, the catalog and its fingerprint, `LEARNER_STATE.md`, the hour budget.
+
+**Not verified.** Whether the application repository exists is recorded in the workspace, not here. This repository cannot check it.
+
+**Approval:** the learner's direction above.

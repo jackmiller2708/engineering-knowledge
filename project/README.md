@@ -1,6 +1,6 @@
 # Project Area
 
-Owner: learner approves changes. This directory is the course's *Engineering Projects* boundary (`KNOWLEDGE_STANDARD_ADDENDUM.md`). It holds project plans, architecture decisions and design documents. It does **not** hold the platform's source code, and nothing here depends on any other repository.
+Owner: learner approves changes. This directory is the course's *Engineering Projects* boundary (`KNOWLEDGE_STANDARD_ADDENDUM.md`). It holds project plans, architecture decisions and design documents. It does **not** hold the platform's source code, and the platform and lab areas below depend on no other repository. The Learning Environment is the exception (see "Learning Environment").
 
 | File | Contents |
 |---|---|
@@ -17,6 +17,10 @@ Logical projects used by the unlocks. A project area is a named piece of work; i
 | PRJ-LABS | Foundations: hex dump tool, bit and codec packages, record log, TCP experiments | `P0-*` unlocks | Standalone. Parts may be reused in PRJ-ENGINE |
 | PRJ-ENGINE | The workflow platform | `P1-` to `P6-` unlocks | See `PLAN.md` |
 | PRJ-REPLAY-LAB | Optional: deterministic replay on a toy workflow (`PX-REPLAY-01`) | optional | Isolated. Must not change PRJ-ENGINE's schema, API or completion criteria. Not in the essential plan |
+
+## Learning Environment
+
+The Engineering Learning Environment is a separate product with its own plan and decisions in [`learning-environment/`](learning-environment/README.md). This repository owns its curriculum, plans and architecture decisions. Its application code lives in a separate repository (`DECISION_LOG.md`, entry "Learning Environment application is a separate repository"). The application is not needed to read or maintain the curriculum. The "Workspace" section below covers only the platform and lab areas above.
 
 ## Workspace (where working code lives)
 
