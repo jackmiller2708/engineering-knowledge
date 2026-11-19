@@ -140,7 +140,7 @@ Treatment B (D4) is the selected workbench foundation `[VI-13]` (Locked). Its in
 |---|---|---|
 | Bar | Flat, instrument-like. Carries the brand, the breadcrumb (Worlds, World, Lab) and the save state. No gradient plate. | `[VI-14]` |
 | Graduated scale | A fine ruled scale along the lower edge of the bar. A structural convention: it carries no information and must not be given labels, numbers or any quantity meaning. | `[VI-14]` |
-| Model-sheet crop marks | See section 3. Decorative. | `[VI-08]` |
+| Model-sheet crop marks | See section 3. A structural convention. | `[VI-08]` |
 | Technical framing | Each framed surface has a header: kind pill, title, and, where justified, a readout. | `[VI-06]` |
 | Inspector selection chip | The Inspector header shows the selected item's name as a chip, in the same chip material as tags. | `[VI-15]` |
 | Footer hint removed | A footer hint must not repeat the Inspector's empty state. Locked. | `[VI-17]` (Locked) |
@@ -338,7 +338,7 @@ This guides future work. It does not authorize changes to the application.
 - **Reusable components only where a visual or interaction responsibility is demonstrably shared.** The demonstrated candidates are: kind pill, tag chip, Inspector shell, model sheet frame, equipment plate, state glyph set. Do not design a universal component framework in advance `[VI-61]`.
 - **Mock logic is not the application's logic.** The mockup relay lamp, messages and place-value totals are illustrative and must not be copied as behaviour.
 - **Check the identity against real content.** The mockups use mock content. The first real workbench (LE-FIRST-WORKBENCH-BRIEF) is the test of the grammar.
-- **Practical accessibility stays in scope.** Keyboard operation of every control, visible focus, readable text, contrast and responsive behaviour are expected. How a visual construction surface is operated by keyboard is unresolved `[VI-62]`. Practical keyboard operation, visible focus, readable text, contrast and responsive behaviour stay in scope for implementation. This specification sets no screen-reader or assistive-technology testing obligation, and none was performed.
+- **Practical accessibility stays in scope.** Practical keyboard operation, visible focus, readable text, contrast and responsive behaviour remain in scope for implementation. Keyboard operation of the visual construction surface is unresolved `[VI-62]`. This specification does not require screen-reader or assistive-technology testing, and none was performed.
 - **Keep the specification current.** If implementation shows a Provisional rule is wrong, change its status and record why.
 
 ## 16. Validation and known limitations
