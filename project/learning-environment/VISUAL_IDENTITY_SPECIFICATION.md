@@ -42,7 +42,7 @@ Inline tags such as `[VI-13]` point to the register row. Register IDs are row la
 | C7 | LE-FIRST-WORKBENCH-BRIEF D5a requires a facts strip (World, Lab, Created, ID) in its own row below the bench. No D3 or D4 mockup shows it. D4 also removes a footer hint. | Left the facts strip and its relation to Treatment B unresolved `[VI-36]`. |
 | C8 | The mockups show the Signal Relay gate, 0 / 5 V, a Lossy link and a place-value bench with mock logic. The curriculum has no concept, term or lab for gates, adders or networking (brief section 1.2). Signal Relay is an application experiment. | Mock semantics are not specified here. Networking stays hypothetical `[VI-63]`. |
 | C9 | The mockup teal fills the abstract bit "1" in Place Value. Teal is reserved for "energised/high". A stored bit is not literally energised. | Recorded as an open reading under `[VI-39]`. |
-| C10 | The relay lab is "Signal relay" on the plate and "Remote relay" in its heading. This comes from mock strings. | Unresolved `[VI-29]`. |
+| C10 | The mockups called the relay lab "Signal relay" on the plate and "Remote relay" in the heading. | Resolved by the owner: the Lab is **Signal Relay** `[VI-29]`. "Remote relay" describes only the equipment or outpost context. |
 | C11 | The evidence directory `design-stage-5/` is untracked in the application repository. In the knowledge repository, `LE-DECISIONS.md` has uncommitted changes and `LE-DESIGN.md`, `LE-PRODUCT.md` and `LE-FIRST-WORKBENCH-BRIEF.md` are untracked. | I read the working-tree versions. They may differ from what is later committed. |
 
 ## 1. Product identity
@@ -51,7 +51,7 @@ ELE is a persistent, hands-on engineering environment. The learner builds, conne
 
 What the product should feel like:
 
-- **Purposeful.** Every visual element exists because it says something about the system or the work. Nothing is there only to look technical.
+- **Purposeful.** Every element has a stated role: an engineering indicator, a structural convention, or environmental context (principle 6). Nothing is there only to look technical, and nothing implies a measurement, property or state that does not exist.
 - **Precise.** Values, units, identifiers and states are exact and legible.
 - **Tactile.** Controls look operable. A switch looks like a switch. State is visible on the control itself.
 - **Technically credible.** Diagrams look like engineering diagrams. Equipment looks like it was built to do something.
@@ -70,7 +70,10 @@ Each principle states how it guides a decision.
 3. **Two registers** `[VI-04]` (Provisional). Abstract models and physical equipment look different, and the difference carries meaning (section 3, 4). Test: can a learner tell at a glance whether something is a model of a thing or the thing?
 4. **One product.** The registers share type, geometry, state treatment and interaction. Test: removing the Model/Equipment pills, would the two still look like the same product?
 5. **State and relationships are legible.** State uses more than one cue. A relationship is shown only where it exists `[VI-10]`, `[VI-42]`.
-6. **Every element has a purpose** `[VI-16]` (Locked). A readout, mark or label represents a property of the system or a function of the interface. Decoration that carries no information is allowed only where section 7 allows it, and is never needed for recognition.
+6. **Every element has a stated role** `[VI-16]` (Locked). Three kinds exist, and an element must be one of them:
+   - **Engineering indicator.** Communicates an actual property or state of the system: a value, unit, range, lamp, state glyph, tag or relationship. It must be true. The concept supplies it.
+   - **Structural convention.** A restrained, consistent mark that organizes or identifies a model sheet, equipment plate or workbench, for example crop marks, the bar's graduated scale, a frame or a kind pill. It carries no engineering information, serves a compositional or identity purpose, and is applied the same way everywhere. It must never look like a measurement, imply a system property, or imitate state. A scale that could be read as a quantity, a tick that looks like data, or a mark that changes without cause is not allowed. A structural convention is not a licence for arbitrary technical decoration. A new one needs a stated compositional or identity purpose, and it must not be needed for recognition or understanding.
+   - **Environmental scenery.** Establishes atmosphere and context (section 7). It never carries state and recedes when it competes with the work.
 7. **Environment supports engineering.** Context recedes when it competes with the engineering representation `[VI-19]`.
 8. **Practicality and maintainability.** Prefer CSS and small SVG the team can maintain. Count the production burden before adding a visual idea (section 14).
 
@@ -86,7 +89,7 @@ An abstract model is a diagram of an idea: the structure and values of a concept
 - **Connections and relationships.** A connection carries direction and, where meaningful, its current value. Relationships between parts use a line or a shared identifier. They are never implied by adjacency alone.
 - **Values.** Technical values and identifiers are set in monospace. Names and prose are set in sans-serif.
 - **Bit patterns.** A bit shows its digit as well as its state, so state does not depend on colour (also LE-FIRST-WORKBENCH-BRIEF 9.3). A cause-and-effect chain, such as Position to Weight to Bit to Contribution to Total, reads in a consistent direction.
-- **Framing (from Treatment B)** `[VI-08]`. Model sheets may carry small corner crop marks. They are graphics, carry no information, and are not needed for recognition. They may be dropped where they cause clutter. In the 720×480 mockups they are dropped.
+- **Framing (from Treatment B)** `[VI-08]`. Model sheets may carry small corner crop marks. They are structural conventions: graphics that carry no information and are not needed for recognition. They may be dropped where they cause clutter. In the 720×480 mockups they are dropped.
 - **Identifiers.** A tag such as `U1` is applied to a part only where a second representation of the same part exists `[VI-10]`. A pure model with one representation does not need tags.
 - **Selection.** Corner brackets plus a light tint `[VI-12]`. Selection is a mark on the thing, not a colour change of the thing.
 - **Range and measurement information.** Shown only when it states a real property of the system, for example the span of a quantity or the time interval of a diagram. It is supplied by the concept, not invented by the interface `[VI-16]`.
@@ -136,11 +139,11 @@ Treatment B (D4) is the selected workbench foundation `[VI-13]` (Locked). Its in
 | Element | Rule | Status |
 |---|---|---|
 | Bar | Flat, instrument-like. Carries the brand, the breadcrumb (Worlds, World, Lab) and the save state. No gradient plate. | `[VI-14]` |
-| Graduated scale | A fine ruled scale along the lower edge of the bar. It is decorative and carries no information. | `[VI-14]` |
+| Graduated scale | A fine ruled scale along the lower edge of the bar. A structural convention: it carries no information and must not be given labels, numbers or any quantity meaning. | `[VI-14]` |
 | Model-sheet crop marks | See section 3. Decorative. | `[VI-08]` |
 | Technical framing | Each framed surface has a header: kind pill, title, and, where justified, a readout. | `[VI-06]` |
 | Inspector selection chip | The Inspector header shows the selected item's name as a chip, in the same chip material as tags. | `[VI-15]` |
-| Footer hint removed | A footer hint that repeats the Inspector's empty state is not shown. | `[VI-17]` |
+| Footer hint removed | A footer hint must not repeat the Inspector's empty state. Locked. | `[VI-17]` (Locked) |
 
 **Readouts are not mandatory** `[VI-16]` (Locked). The mockups show a range string in every framed panel header (`8 bits · 0 to 255`, `rails 0 / 5 V`, `logic 0 | 1`, `t = 1 to 4`). Those strings illustrate the position and style of a readout. They are not content to reproduce.
 
@@ -151,7 +154,7 @@ Treatment B (D4) is the selected workbench foundation `[VI-13]` (Locked). Its in
 
 **Hierarchy.** From most to least prominent: the engineering representation; the state it shows and the selection; the Inspector; panel headers and readouts; workbench context (bar, crumbs, tool row). Context uses smaller, quieter type and less contrast than the representation. The bar and framing must not compete with the representation.
 
-**How identity survives without environmental illustration.** It rests on the register pair, technical type, tags, the Inspector, the instrument bar and consistent framing. Two decorative parts of Treatment B (the bar scale and crop marks) carry no information. If they were removed the workbench would still work, and, per the D4 removal test, it would look close to D3. The identity therefore depends on grammar more than on these two marks.
+**How identity survives without environmental illustration.** It rests on the register pair, technical type, tags, the Inspector, the instrument bar and consistent framing. Two structural conventions of Treatment B (the bar scale and crop marks) carry no engineering information, which is why they must never be read as measurements. If they were removed the workbench would still work, and, per the D4 removal test, it would look close to D3. The identity therefore depends on grammar more than on these two marks.
 
 **Not specified:** the arrangement of Library and Investigation regions, whether the facts strip (LE-FIRST-WORKBENCH-BRIEF D5a) sits inside the tool row, and the relation of a "tool row" to LE-DESIGN's regions `[VI-33]`, `[VI-36]`.
 
@@ -203,7 +206,7 @@ Decisions (Locked unless stated):
 
 D4 evidence behind this (Observation, one reviewer, mockups): the lab name told labs apart on Place Value, where nothing else named the Lab. The number added little. On Signal Relay the plate and the heading both carried a name. The plate said nothing about activity, system or physical location, and claiming any of those would invent metadata.
 
-Whether the word "bay" is shown to learners is Unresolved `[VI-28]`, because LE-005 sets the vocabulary. The name of the relay lab is Unresolved `[VI-29]`. A rule for when a Lab shows a label (for example "where the Lab has no heading of its own") is a Hypothesis, not a decision.
+Whether the word "bay" is shown to learners is Unresolved `[VI-28]`, because LE-005 sets the vocabulary. The relay Lab is named **Signal Relay** (Locked `[VI-29]`). "Remote relay" is used only for the equipment or outpost context, never as a Lab name. A rule for when a Lab shows a label (for example "where the Lab has no heading of its own") is a Hypothesis, not a decision.
 
 ## 9. Information hierarchy and Inspector
 
@@ -335,7 +338,7 @@ This guides future work. It does not authorize changes to the application.
 - **Reusable components only where a visual or interaction responsibility is demonstrably shared.** The demonstrated candidates are: kind pill, tag chip, Inspector shell, model sheet frame, equipment plate, state glyph set. Do not design a universal component framework in advance `[VI-61]`.
 - **Mock logic is not the application's logic.** The mockup relay lamp, messages and place-value totals are illustrative and must not be copied as behaviour.
 - **Check the identity against real content.** The mockups use mock content. The first real workbench (LE-FIRST-WORKBENCH-BRIEF) is the test of the grammar.
-- **Accessibility is separate work.** The keyboard and screen-reader model for the construction surface is unresolved (LE-DESIGN Unknown) `[VI-62]`. The brief requires real assistive-technology testing for the first workbench. That has not been done for any design here.
+- **Practical accessibility stays in scope.** Keyboard operation of every control, visible focus, readable text, contrast and responsive behaviour are expected. How a visual construction surface is operated by keyboard is unresolved `[VI-62]`. Practical keyboard operation, visible focus, readable text, contrast and responsive behaviour stay in scope for implementation. This specification sets no screen-reader or assistive-technology testing obligation, and none was performed.
 - **Keep the specification current.** If implementation shows a Provisional rule is wrong, change its status and record why.
 
 ## 16. Validation and known limitations
@@ -358,7 +361,7 @@ All of these were run at 1100×720 and 720×480 only. The page records the full 
 
 ### 16.3 What was not done
 - **No formal accessibility audit.** Contrast is a token calculation. Composited states (a tint over a plate) were not measured.
-- **No screen-reader testing.** The first workbench brief requires it later.
+- **No screen-reader or assistive-technology testing was performed.** This specification does not require it.
 - **The keyboard checks are synthetic.** They are not real keystrokes. They do not test Tab order or visible focus. In headless Firefox the document has no focus, so one focus-retention check was skipped.
 - **No user testing.** The evidence is mockups and one reviewer (the author of the mockups).
 - **No low-DPI, long-session or learner testing.**
@@ -384,17 +387,17 @@ Statuses: **L** Locked, **P** Provisional, **U** Unresolved. "Changes if" says w
 | VI-05 | Principle "Expose concepts, hide mechanisms", read as: show the engineering concept, not interface machinery. | P | Exploration brief; reading is my interpretation (C2) | Owner words it differently |
 | VI-06 | A model is a flat sheet with a dashed frame, thin ink lines, mono values, and a Model pill. | P | D3 mockups | Real models need another form |
 | VI-07 | There is no universal diagram style for all abstract concepts. | L | Commissioning task | Owner decides otherwise |
-| VI-08 | Model sheets may carry corner crop marks. They are decorative and not needed for recognition. | P | D4 Treatment B; removal test | Clutter in real use, or owner drops them |
+| VI-08 | Model sheets may carry corner crop marks as a structural convention. They carry no information and are not needed for recognition. | P | D4 Treatment B; removal test | Clutter in real use, or owner drops them |
 | VI-09 | Equipment is a plate with solid forms, operable controls, lamps and measured units. | P | D3 mockups | Equipment for another world needs another form |
 | VI-09a | No invented equipment for concepts with no physical counterpart. Not every panel is a metal box. | L | Commissioning task | Owner decides otherwise |
 | VI-10 | Shared identifiers (tags) appear only where two representations of the same part exist. | P | D3 foundation | A real case needs another rule |
 | VI-11 | In a hybrid screen, Model and Equipment pills distinguish the two registers. | P | D3 mockups | Pills prove noisy or unnecessary |
 | VI-12 | Selection is corner brackets plus a tint, applied in every view of the selected part. | P | D3 foundation; D3 fix of relay selection | Selection proves unclear in use |
 | VI-13 | Treatment B is the workbench foundation. | L | Commissioning task (product-owner selection after D4) | Owner decides otherwise |
-| VI-14 | The bar is flat and instrument-like, with a graduated scale along its lower edge. The scale is decorative. | P | D4 Treatment B | Scale distracts or adds cost |
+| VI-14 | The bar is flat and instrument-like, with a graduated scale along its lower edge. The scale is a structural convention that implies no quantity. | P | D4 Treatment B | Scale distracts or adds cost |
 | VI-15 | The Inspector header shows the selected name as a chip. | P | D4 Treatment B | Confusion with tags or Lab labels |
-| VI-16 | A technical readout appears only for a meaningful property. The concept owns its semantics and values. The visual system owns presentation. No readout on every panel. | L | Commissioning task | Owner decides otherwise |
-| VI-17 | The footer hint repeating the Inspector's empty state is not shown. | P | D4 finding; both treatments dropped it. The owner did not rule on it separately | Owner prefers a hint |
+| VI-16 | Every element has one stated role: engineering indicator, structural convention or environmental scenery. Structural conventions are restrained, consistent and never imply measurements, properties or state. A technical readout appears only for a meaningful property. The concept owns its semantics and values. The visual system owns presentation. No readout on every panel. | L | Commissioning task | Owner decides otherwise |
+| VI-17 | A footer hint must not repeat the Inspector's empty state, so the redundant hint is removed. | L | D4 finding; owner approval of the removal | Owner decides otherwise |
 | VI-18 | The persistent facility (hall, bays) is the Worlds-level identity. | P | D to D3 mockups | Worlds screen design finds another form |
 | VI-19 | The workbench stays recognisable without environmental scenery. Treatment A is not the global workbench treatment. | L | Commissioning task | Owner decides otherwise |
 | VI-20 | A floor treatment may be used as contextual scenery in a suitable physical environment. It is never mandatory. | L | Commissioning task | Owner decides otherwise |
@@ -406,7 +409,7 @@ Statuses: **L** Locked, **P** Provisional, **U** Unresolved. "Changes if" says w
 | VI-26 | A Lab identity label must look different from an engineering-element tag chip. | L | Commissioning task | Owner decides otherwise |
 | VI-27 | The visual form that separates Lab labels from tag chips. | U | D4 mockup uses the same chip material; confusion untested | A test with real use |
 | VI-28 | Whether "bay" is shown to learners. | U | LE-005 vocabulary; brief tripwire 7 (C3) | Owner decides vocabulary |
-| VI-29 | The name of the relay lab ("Signal relay" or "Remote relay"). | U | Mock strings differ (C10) | Owner or the lab's author names it |
+| VI-29 | The relay Lab is named Signal Relay. "Remote relay" describes only the equipment or outpost context. | L | Owner selection after review of the D4 finding (C10) | Owner decides otherwise |
 | VI-30 | Selection inspection with a contextual Inspector is the default. With nothing selected, structure and state stay visible. | L | LE-010 | Owner changes LE-010 |
 | VI-31 | The Inspector is a consistent mechanism and does not hide the primary representation. | L | Commissioning task; LE-011 | Owner decides otherwise |
 | VI-32 | Inspector placements: right column (equipment-first, 1100), bottom drawer (linked), collapsed handle; permanent header with Hide/Show; selection never changes open state. | P | D3 validation (0 flagged rows; shift 0 on select in linked mode) | Real content or a larger region design needs another placement |
@@ -439,10 +442,10 @@ Statuses: **L** Locked, **P** Provisional, **U** Unresolved. "Changes if" says w
 | VI-59 | Numeric thresholds for choosing an asset technique. | U | Not supported by the sources | Production experience |
 | VI-60 | Engineering semantics come from the domain or curriculum. The interface does not invent them. | L | LE-001, LE-002; commissioning task | Owner decides otherwise |
 | VI-61 | Reusable components only where a visual or interaction responsibility is demonstrably shared. No speculative framework. | P | Task statement; LE-PLAN non-goal on frameworks | Real shared use shows a different need |
-| VI-62 | Keyboard and screen-reader model of the construction surface. | U | LE-DESIGN Unknown; no AT testing done | An accessibility design pass and AT testing |
+| VI-62 | Keyboard operation model of the construction surface (focus order, selection and activation by keyboard). Screen-reader and assistive-technology work is outside this specification. | U | LE-DESIGN Unknown (keyboard part); synthetic keyboard checks only | A keyboard-interaction design for the construction surface |
 | VI-63 | Networking and Lossy link remain hypothetical. They are not curriculum and not validated. | L | Commissioning task; curriculum gap | Curriculum content exists and is reviewed |
 
-**Counts.** Locked 20, Provisional 29, Unresolved 15, total 64. Counts are by register row, where VI-09a is its own row.
+**Counts.** Locked 22, Provisional 28, Unresolved 14, total 64. Counts are by register row, where VI-09a is its own row.
 
 ## 18. Review against the brief's checks
 
