@@ -1,6 +1,6 @@
 # ELE Visual Identity Specification
 
-Owner: learner approves; Claude proposes. Status: **draft for review. Not approved.** Nothing in this document has been implemented, and it does not authorize implementation.
+Owner: learner approves; Claude proposes. Status: **approved by the owner as the canonical visual identity reference** after review of commit `f3c162c44bbce71c332ce3ae6c7c4bf9a6853360`. Rows marked Provisional or Unresolved in section 17 keep those statuses. Nothing in this document has been implemented, and it does not authorize implementation.
 
 This is the canonical home of the visual identity for the Engineering Learning Environment (ELE). The application repository holds experiments and evidence only. It does not hold the specification.
 
