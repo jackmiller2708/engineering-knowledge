@@ -20,8 +20,8 @@ Carry the approved visual grammar into the application in small, reviewable step
 | Layer | What it is | Status now |
 |---|---|---|
 | **Visual identity specification** | What the identity is: grammar, rules, decision statuses. Lives in this repository. | Approved as the canonical reference. Not changed by this plan. |
-| **Design-system foundations** | The smallest set of semantic styling roles the first workbench needs (surface, border, text, state, selection). | Stage 1. Only what a Stage 3 rule uses. |
-| **Workbench integration** | Applying the roles and any shared primitive to the Place Value Bench. | Stages 2 and 3. |
+| **Design-system foundations** | The smallest set of semantic styling roles the first workbench needs (surface, border, text, state, selection). | Stage 1, conditional. Only what a Stage 3 rule uses, and skipped if none is needed. |
+| **Workbench integration** | Applying the roles and any shared primitive to the Place Value Bench. | Stage 2 (conditional) and Stage 3. |
 | **Later expansion** | Equipment plates, hybrid views, facility scenery, further primitives. | Conditional (section 4, "Later expansion"). |
 
 ### 1.3 What this plan does not authorize
@@ -112,7 +112,12 @@ Each stage is independently reviewable and needs owner approval to start. Comple
 **Sequence and dependencies.**
 1. **Stage 0** establishes the real application baseline and a reliable capture method for both themes.
 2. **The first executable task (section 7) may start directly after Stage 0.** It does not need Stage 1 or Stage 2. Its selection treatment is a local styling pattern in one stylesheet. It is not a reusable component or a design-system primitive.
-3. **Stages 1 and 2 are conditional.** They happen only if a later change demonstrates a need. Do not build a foundation or an abstraction to satisfy a stage label.
+3. **Stages 1 and 2 are conditional and independent of each other by default.**
+   - **Stage 2 may follow Stage 0 directly, without Stage 1,** when a demonstrated shared primitive can be built from existing styling roles and tokens.
+   - **Stage 1 precedes Stage 2 only when** that particular primitive genuinely requires a semantic role that Stage 1 would introduce.
+   - **If neither has a demonstrated need, skip both.**
+   - Neither stage is a prerequisite of the first executable task (section 7).
+   - Do not create a shared primitive or a semantic role speculatively, or to satisfy a stage label.
 4. **Stage 3** items other than selection depend on Stages 1 and 2 only to the extent that they use a role or primitive those stages actually produced.
 
 **Validation is lean and stage-specific.** The full application suite is not run after every stage. It runs once at Stage 4 as a milestone check. It may run earlier only if a specific dependency or architecture risk could trigger an existing tripwire, and the stage report must name that risk.
@@ -155,7 +160,7 @@ A **focused check** means: the specific spec file(s) named, run alone. A **viewp
 
 ### Stage 2: Shared visual primitives
 
-**Conditional.** Not a prerequisite of the first executable task.
+**Conditional.** Not a prerequisite of the first executable task. May follow Stage 0 directly. Stage 1 is a dependency only for a primitive that genuinely needs a semantic role Stage 1 introduced.
 
 Decide each primitive on demonstrated need. Build none for completeness.
 
@@ -171,8 +176,8 @@ Decide each primitive on demonstrated need. Build none for completeness.
 | Equipment plate | No equipment in the bench | **Not built.** |
 
 - **Purpose.** Introduce a primitive only where the bench shows it is shared.
-- **Deliverables.** The primitives marked "Build" above, as CSS, with a one-line statement of the shared responsibility each carries.
-- **Dependencies.** Stage 1; D-03 for the pill.
+- **Deliverables.** Only those primitives from the table that a demonstrated shared need justifies, as CSS, with a one-line statement of the shared responsibility each carries.
+- **Dependencies.** Stage 0. Stage 1 **only** for a primitive that genuinely requires a semantic role introduced there. A primitive that can be written with existing tokens and roles does not wait for Stage 1. If no primitive has a demonstrated need, this stage is skipped. (The kind pill is deferred, D-03.)
 - **MUST.** Keep primitives as CSS unless two real call sites need the same markup and behaviour. Keep existing class names that tests rely on (`sel`, `pos`, `bit`, `.places`, `.total .value` and so on) or update those tests with the owner's agreement.
 - **MUST NOT.** Add components for equipment, tags, state glyphs or hybrids. Add a component folder or package for the visual system.
 - **Tripwires.** A primitive needs a second call site that does not exist (do not build it). A primitive needs new learner-facing copy (stop, D-03).
